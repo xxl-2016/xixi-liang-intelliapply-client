@@ -1,0 +1,1 @@
+import "./JobListPage.scss";
