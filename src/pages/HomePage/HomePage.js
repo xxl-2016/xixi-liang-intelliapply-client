@@ -23,9 +23,11 @@ export default function HomePage() {
       <section className="homePage">
         <div className="homePage-hero">
           <Link to="/about-us" className="homePage-hero__news">
-            News
+            ABOUT US
           </Link>
-          <Link to="/login" className="homePage-hero__login">Login</Link>
+          <Link to="/login" className="homePage-hero__login">
+            LOGIN
+          </Link>
         </div>
         <div className="homePage-click">
           <Spline
@@ -44,14 +46,24 @@ export default function HomePage() {
                 className="homePage-click__sign--button"
                 onClick={handleExpandSignUp}
               >
-                Sign Up
+                SIGN UP
               </button>
             )}
             {isExpandedSignUp && (
               <div className="homePage-click__sign--expanded">
-                <input className="homePage-click__sign--expanded-username" type="text" placeholder="Username" />
-                <input className="homePage-click__sign--expanded-password" type="password" placeholder="Password" />
-                <button className="homePage-click__sign--expanded-submit">Submit</button>
+                <input
+                  className="homePage-click__sign--expanded-username"
+                  type="text"
+                  placeholder="Username"
+                />
+                <input
+                  className="homePage-click__sign--expanded-password"
+                  type="password"
+                  placeholder="Password"
+                />
+                <button className="homePage-click__sign--expanded-submit">
+                  Submit
+                </button>
               </div>
             )}
           </div>

@@ -1,3 +1,131 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/typography" as *;
+
+.aboutus {
+  height: 38rem;
+  @include mobile {
+    margin-top: 20rem;
+  }
+  @include tablet {
+    margin-top: 25rem;
+  }
+  @include desktop {
+    margin-top: 30rem;
+  }
+  &-thanks {
+    &__text {
+      color: white;
+      @include mobile {
+        font-size: 1rem;
+        font-weight: 200;
+        margin: 2rem;
+      }
+      @include tablet {
+        font-size: 2rem;
+        font-weight: 200;
+        margin: 2rem;
+      }
+      @include desktop {
+        font-size: 3rem;
+        font-weight: 200;
+        margin: 2rem;
+      }
+    }
+  }
+  &-social {
+    &__heading {
+      color: white;
+      margin-top: 4rem;
+      @include mobile {
+        font-size: 0.7rem;
+      }
+      @include tablet {
+        font-size: 1.5rem;
+      }
+      @include desktop {
+        font-size: 2rem;
+      }
+    }
+    &__icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      &--facebook {
+        @include mobile {
+          margin: 0 0.5rem;
+        }
+        @include tablet {
+          margin: 0 1rem;
+        }
+        @include desktop {
+          margin: 0 2rem;
+        }
+        &-icon {
+          @include mobile {
+            width: 70%;
+            height: fit-content;
+          }
+          @include tablet {
+            width: 100%;
+            height: fit-content;
+          }
+          @include desktop {
+            width: 150%;
+            height: fit-content;
+          }
+        }
+      }
+      &--twitter {
+        @include mobile {
+          margin: 0 0.5rem;
+        }
+        @include tablet {
+          margin: 0 1rem;
+        }
+        @include desktop {
+          margin: 0 2rem;
+        }
+        &-icon {
+          @include mobile {
+            width: 70%;
+            height: fit-content;
+          }
+          @include tablet {
+            width: 100%;
+            height: fit-content;
+          }
+          @include desktop {
+            width: 150%;
+            height: fit-content;
+          }
+        }
+      }
+      &--instagram {
+        @include mobile {
+          margin: 0 0.5rem;
+        }
+        @include tablet {
+          margin: 0 1rem;
+        }
+        @include desktop {
+          margin: 0 2rem;
+        }
+        &-icon {
+          @include mobile {
+            width: 70%;
+            height: fit-content;
+          }
+          @include tablet {
+            width: 100%;
+            height: fit-content;
+          }
+          @include desktop {
+            width: 150%;
+            height: fit-content;
+          }
+        }
+      }
+    }
+  }
+}
