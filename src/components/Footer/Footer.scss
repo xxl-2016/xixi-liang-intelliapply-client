@@ -1,3 +1,22 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/typography" as *;
+
+.footer {
+  color: white;
+  display: flex;
+  justify-content: center;
+  @include mobile {
+    font-size: 0.5rem;
+    padding: 2rem 0;
+    margin-top: 2rem;
+  }
+
+  @include tablet {
+    font-size: 0.8rem;
+  }
+
+  @include desktop {
+    font-size: 1rem;
+  }
+}

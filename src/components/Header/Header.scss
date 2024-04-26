@@ -1,3 +1,24 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/typography" as *;
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  &-logo {
+    margin: 1rem;
+    &__img {
+      cursor: pointer;
+      @include mobile {
+        width: 8rem;
+      }
+      @include tablet {
+        width: 10rem;
+      }
+      @include desktop {
+        width: 12rem;
+      }
+    }
+  }
+}
