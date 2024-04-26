@@ -1,5 +1,11 @@
 import "./Footer.scss";
 
 export default function Footer() {
-  return <footer>This is footer</footer>;
+  return (
+    <div className="footer">
+      <p className="footer-text">
+        © IntelliApply Pro Inc. All Rights Reserved.
+      </p>
+    </div>
+  );
 }
