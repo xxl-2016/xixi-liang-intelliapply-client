@@ -1,7 +1,9 @@
 import "./LoginPage.scss";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage({ setIsUserLoggedIn }) {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -11,16 +13,20 @@ export default function LoginPage({ setIsUserLoggedIn }) {
     console.log(username, password);
 
     try {
-      const response = await axios.post("http://localhost:6060/login", {
+      const response = await axios.post("http://localhost:6060/auth/login", {
         username: username,
         password: password,
       });
-      console.log(response);
-
-      localStorage.setItem("authToken", response.data);
+      const authToken = response.data;
+      const token = authToken.access_token;
+      localStorage.setItem("authToken", token);
       setIsUserLoggedIn(true);
+      navigate('/profile');
     } catch (error) {
       console.error(error);
+      if (error.response && error.response.status === 401) {
+        alert("Username or password is incorrect");
+      }
     }
   };
   return (
@@ -30,11 +36,13 @@ export default function LoginPage({ setIsUserLoggedIn }) {
           <input
             className="login-page__form--username"
             type="text"
+            name="username"
             placeholder="Username or Email"
           />
           <input
             className="login-page__form--password"
             type="password"
+            name="password"
             placeholder="Password"
           />
           <button className="login-page__form--submit">Submit</button>
