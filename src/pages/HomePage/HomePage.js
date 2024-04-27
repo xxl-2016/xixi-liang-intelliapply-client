@@ -4,7 +4,7 @@ import Spline from "@splinetool/react-spline";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function HomePage() {
+export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [isExpandedSignUp, setIsExpandedSignUp] = useState(false);
   const [isExpandedLogin, setIsExpandedLogin] = useState(false);
 
@@ -22,12 +22,43 @@ export default function HomePage() {
     <>
       <section className="homePage">
         <div className="homePage-hero">
-          <Link to="/about-us" className="homePage-hero__news">
-            ABOUT US
+          {isUserLoggedIn ? (
+            <div className="homePage-hero__active">
+              <Link to="/about-us" className="homePage-hero__active--news">
+                ABOUT US
+              </Link>
+              <img
+                src="#"
+                alt="Avatar"
+                className="homePage-hero__active--avatar"
+              />
+              <button
+                className="homePage-hero__active--logout"
+                onClick={() => {
+                  localStorage.removeItem("authToken");
+                  setIsUserLoggedIn(false);
+                }}
+              >
+                LOG OUT
+              </button>
+            </div>
+          ) : (
+            <>
+              <Link to="/about-us" className="homePage-hero__news">
+                ABOUT US
+              </Link>
+              <Link to="/login" className="homePage-hero__login">
+                LOGIN
+              </Link>
+            </>
+          )}
+        </div>
+        <div className="homePage-hero__job">
+        {isUserLoggedIn ? (
+          <Link to="/job-list" className="homePage-hero__job--list">
+            JOB LIST
           </Link>
-          <Link to="/login" className="homePage-hero__login">
-            LOGIN
-          </Link>
+        ) : null}
         </div>
         <div className="homePage-click">
           <Spline
@@ -42,12 +73,14 @@ export default function HomePage() {
                 placeholder="Sign Up With Your Email"
               />
             ) : (
-              <button
-                className="homePage-click__sign--button"
-                onClick={handleExpandSignUp}
-              >
-                SIGN UP
-              </button>
+              !isUserLoggedIn && (
+                <button
+                  className="homePage-click__sign--button"
+                  onClick={handleExpandSignUp}
+                >
+                  SIGN UP
+                </button>
+              )
             )}
             {isExpandedSignUp && (
               <div className="homePage-click__sign--expanded">

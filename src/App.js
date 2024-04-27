@@ -19,7 +19,15 @@ export default function App() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  isUserLoggedIn={isUserLoggedIn}
+                  setIsUserLoggedIn={setIsUserLoggedIn}
+                />
+              }
+            />
             <Route path="/about-us" element={<AboutUsPage />} />
             <Route
               path="/login"

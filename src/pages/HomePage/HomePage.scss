@@ -12,6 +12,55 @@
   &-hero {
     display: flex;
     justify-content: space-between;
+    &__active {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      @include mobile {
+        margin-bottom: 22rem;
+      }
+      @include tablet {
+        margin-bottom: 25rem;
+      }
+      &--news {
+        text-decoration: none;
+        font-size: 0.8rem;
+        padding: 0 1rem;
+        border-radius: 20px;
+        background-color: rgba(#4d3589, 0.2);
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(#4d3589, 0.6);
+        }
+        @include tablet {
+          font-size: 1rem;
+        }
+        @include desktop {
+          font-size: 1.5rem;
+        }
+      }
+      &--avatar {
+        display: none;
+      }
+      &--logout {
+        font-size: 0.8rem;
+        padding: 0 1rem;
+        border-radius: 20px;
+        color: white;
+        border: none;
+        background-color: rgba(#00eaff, 0.1);
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(#00eaff, 0.3);
+        }
+        @include tablet {
+          font-size: 1rem;
+        }
+        @include desktop {
+          font-size: 1.5rem;
+        }
+      }
+    }
     &__news {
       text-decoration: none;
       font-size: 0.8rem;
@@ -55,6 +104,30 @@
     }
     @include desktop {
       margin: 0 5rem;
+    }
+    &__job {
+      &--list {
+        @include mobile {
+          color: white;
+          background-color: transparent;
+          font-size: 1rem;
+          border-radius: 40px;
+          padding: 0.2rem 2rem;
+          border: none;
+          background-color: rgba(#00eaff, 0.2);
+          width: fit-content;
+          cursor: pointer;
+          &:hover {
+            background-color: rgba(#00eaff, 0.5);
+          }
+        }
+        @include tablet {
+          font-size: 1.5rem;
+        }
+        @include desktop {
+          font-size: 2rem;
+        }
+      }
     }
   }
   &-click {
