@@ -13,7 +13,7 @@ export default function LoginPage({ setIsUserLoggedIn }) {
     console.log(username, password);
 
     try {
-      const response = await axios.post("http://localhost:6060/auth/login", {
+      const response = await axios.post("http://localhost:6060/auth", {
         username: username,
         password: password,
       });

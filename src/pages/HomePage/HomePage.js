@@ -2,11 +2,16 @@ import Header from "../../components/Header/Header.js";
 import "./HomePage.scss";
 import Spline from "@splinetool/react-spline";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [isExpandedSignUp, setIsExpandedSignUp] = useState(false);
   const [isExpandedLogin, setIsExpandedLogin] = useState(false);
+  const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleExpandSignUp = () => {
     setIsExpandedSignUp(!isExpandedSignUp);
@@ -18,8 +23,66 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
     setIsExpandedSignUp(false);
   };
 
+  const validateForm = () => {
+    if (!username || !email || !password) {
+      alert("Please fill out all fields.");
+      return false;
+    }
+    if (username.length < 6) {
+      alert("Username must be at least 6 characters long.");
+      return false;
+    }
+    if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
+      alert("Please enter a valid email address.");
+      return false;
+    }
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters long.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "username") {
+      setUsername(value);
+    } else if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+  };
+
+  const handleSignUp = async () => {
+    if (!validateForm()) {
+      return;
+    }
+    try {
+      const response = await fetch("http://localhost:6060/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      if (response.ok) {
+        alert("Sign up successful!");
+        setIsSignUpSuccess(true);
+        setIsUserLoggedIn(true);
+      } else {
+        alert("Sign up failed.");
+        setIsSignUpSuccess(false);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
+      {isSignUpSuccess && <Navigate to="/login" />}
       <section className="homePage">
         <div className="homePage-hero">
           {isUserLoggedIn ? (
@@ -54,11 +117,11 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
           )}
         </div>
         <div className="homePage-hero__job">
-        {isUserLoggedIn ? (
-          <Link to="/job-list" className="homePage-hero__job--list">
-            JOB LIST
-          </Link>
-        ) : null}
+          {isUserLoggedIn ? (
+            <Link to="/job-list" className="homePage-hero__job--list">
+              JOB LIST
+            </Link>
+          ) : null}
         </div>
         <div className="homePage-click">
           <Spline
@@ -71,6 +134,9 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                 type="text"
                 className="homePage-click__sign--input"
                 placeholder="Sign Up With Your Email"
+                name="email"
+                value={email}
+                onChange={handleInputChange}
               />
             ) : (
               !isUserLoggedIn && (
@@ -88,13 +154,22 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                   className="homePage-click__sign--expanded-username"
                   type="text"
                   placeholder="Username"
+                  name="username"
+                  onChange={handleInputChange}
+                  value={username}
                 />
                 <input
                   className="homePage-click__sign--expanded-password"
                   type="password"
                   placeholder="Password"
+                  name="password"
+                  onChange={handleInputChange}
+                  value={password}
                 />
-                <button className="homePage-click__sign--expanded-submit">
+                <button
+                  className="homePage-click__sign--expanded-submit"
+                  onClick={handleSignUp}
+                >
                   Submit
                 </button>
               </div>

@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage/HomePage.js";
 import AboutUsPage from "./pages/AboutUsPage/AboutUsPage.js";
 import LoginPage from "./pages/LoginPage/LoginPage.js";
 import UserProfilePage from "./pages/UserProfilePage/UserProfilePage.js";
+import JobListPage from "./pages/JobListPage/JobListPage.js";
 import "./App.scss";
 
 export default function App() {
@@ -38,6 +39,14 @@ export default function App() {
                 path="/profile"
                 element={
                   <UserProfilePage setIsUserLoggedIn={setIsUserLoggedIn} />
+                }
+              />
+            ) : null}
+            {isUserLoggedIn ? (
+              <Route
+                path="/job-list"
+                element={
+                  <JobListPage setIsUserLoggedIn={setIsUserLoggedIn} />
                 }
               />
             ) : null}
