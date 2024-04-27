@@ -3,15 +3,21 @@
 @use "../../styles/partials/typography" as *;
 
 .aboutus {
-  height: 38rem;
   @include mobile {
-    margin-top: 20rem;
+    height: 17rem;
   }
-  @include tablet {
-    margin-top: 25rem;
-  }
-  @include desktop {
-    margin-top: 30rem;
+  margin-top: 40rem;
+  &-network {
+    &__spline {
+      z-index: -10;
+      @include mobile {
+        position: absolute;
+        top: -20%;
+      }
+      @include desktop {
+        top: -20%;
+      }
+    }
   }
   &-thanks {
     &__text {
@@ -36,7 +42,7 @@
   &-social {
     &__heading {
       color: white;
-      margin-top: 4rem;
+      margin-top: 2rem;
       @include mobile {
         font-size: 0.7rem;
       }

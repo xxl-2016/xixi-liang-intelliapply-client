@@ -3,11 +3,18 @@ import { Link } from "react-router-dom";
 import facebook from "../../assets/icons/Icon-facebook.svg";
 import twitter from "../../assets/icons/Icon-twitter.svg";
 import instagram from "../../assets/icons/Icon-instagram.svg";
+import Spline from "@splinetool/react-spline";
 
 export default function AboutUsPage() {
   return (
     <>
       <section className="aboutus">
+        <div className="aboutus-network">
+          <Spline
+            className="aboutus-network__spline"
+            scene="https://prod.spline.design/u5a12k2nXlnDk7Xj/scene.splinecode"
+          />
+        </div>
         <div className="aboutus-thanks">
           <h1 className="aboutus-thanks__text">Thanks for visiting our site</h1>
         </div>
