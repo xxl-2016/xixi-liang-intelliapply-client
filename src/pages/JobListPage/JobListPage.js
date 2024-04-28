@@ -9,10 +9,10 @@ export default function JobSearch() {
     try {
       const response = await axios.get("http://localhost:6060/jobs", {
         params: {
-          keywords: "developer",
-          locationId: "92000000",
-          datePosted: "anyTime",
-          sort: "mostRelevant",
+          keywords: keywords || "developer",
+          //   locationId: "92000000",
+          //   datePosted: "anyTime",
+          //   sort: "mostRelevant",
         },
       });
       setJobList(response.data.data);
@@ -27,7 +27,7 @@ export default function JobSearch() {
         type="text"
         value={keywords}
         onChange={(e) => setKeywords(e.target.value)}
-        placeholder="Enter keywords..."
+        placeholder="Enter keywords"
       />
       <button onClick={handleSearch}>Search</button>
 
