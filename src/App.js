@@ -46,7 +46,10 @@ export default function App() {
               <Route
                 path="/job-list"
                 element={
-                  <JobListPage setIsUserLoggedIn={setIsUserLoggedIn} />
+                  <JobListPage
+                    isUserLoggedIn={isUserLoggedIn}
+                    setIsUserLoggedIn={setIsUserLoggedIn}
+                  />
                 }
               />
             ) : null}

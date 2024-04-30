@@ -1,13 +1,15 @@
 import Header from "../../components/Header/Header.js";
 import "./HomePage.scss";
 import Spline from "@splinetool/react-spline";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
 
 export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [isExpandedSignUp, setIsExpandedSignUp] = useState(false);
   const [isExpandedLogin, setIsExpandedLogin] = useState(false);
   const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
+  const [user, setUser] = useState(null);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -72,13 +74,27 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
         setIsSignUpSuccess(true);
         setIsUserLoggedIn(true);
       } else {
-        alert("Sign up failed.");
+        const data = await response.json();
+        alert(`Sign up failed: ${data.error}`);
         setIsSignUpSuccess(false);
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const token = localStorage.getItem("authToken");
+      const response = await axios.get("http://localhost:6060/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data);
+    };
+    fetchProfile();
+  }, []);
 
   return (
     <>
@@ -90,20 +106,22 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
               <Link to="/about-us" className="homePage-hero__active--news">
                 ABOUT US
               </Link>
-              <img
-                src="#"
-                alt="Avatar"
-                className="homePage-hero__active--avatar"
-              />
-              <button
-                className="homePage-hero__active--logout"
-                onClick={() => {
-                  localStorage.removeItem("authToken");
-                  setIsUserLoggedIn(false);
-                }}
-              >
-                LOG OUT
-              </button>
+              <div className="homePage-hero__active--user">
+                {user && (
+                  <button className="homePage-hero__active--user-avatar">
+                    <Link to="/profile">{user.username.toUpperCase()}</Link>
+                  </button>
+                )}
+                <button
+                  className="homePage-hero__active--user-logout"
+                  onClick={() => {
+                    localStorage.removeItem("authToken");
+                    setIsUserLoggedIn(false);
+                  }}
+                >
+                  <Link to="/about-us">LOG OUT</Link>
+                </button>
+              </div>
             </div>
           ) : (
             <>

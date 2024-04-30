@@ -23,8 +23,8 @@
         margin-bottom: 25rem;
       }
       &--news {
-        text-decoration: none;
         font-size: 0.8rem;
+        text-decoration: none;
         padding: 0 1rem;
         border-radius: 20px;
         background-color: rgba(#4d3589, 0.2);
@@ -39,25 +39,49 @@
           font-size: 1.5rem;
         }
       }
-      &--avatar {
-        display: none;
-      }
-      &--logout {
-        font-size: 0.8rem;
-        padding: 0 1rem;
-        border-radius: 20px;
-        color: white;
-        border: none;
-        background-color: rgba(#00eaff, 0.1);
-        cursor: pointer;
-        &:hover {
-          background-color: rgba(#00eaff, 0.3);
-        }
+      &--user {
         @include tablet {
-          font-size: 1rem;
+          display: flex;
+          justify-content: space-between;
+          width: 28%;
         }
-        @include desktop {
-          font-size: 1.5rem;
+        &-avatar {
+          @include mobile {
+            font-size: 0.8rem;
+            display: block;
+            padding: 0 1rem;
+            border: none;
+            border-radius: 30px;
+            background-color: rgba(#00eaff, 0.1);
+            color: white;
+          }
+          @include tablet {
+            font-size: 1rem;
+          }
+          @include desktop {
+            font-size: 1.5rem;
+          }
+        }
+        &-logout {
+          @include mobile {
+            display: none;
+          }
+          @include tablet {
+            display: block;
+            font-size: 1rem;
+            padding: 0 1rem;
+            border-radius: 20px;
+            color: white;
+            border: none;
+            background-color: rgba(#00eaff, 0.1);
+            cursor: pointer;
+            &:hover {
+              background-color: rgba(#00eaff, 0.3);
+            }
+          }
+          @include desktop {
+            font-size: 1.5rem;
+          }
         }
       }
     }

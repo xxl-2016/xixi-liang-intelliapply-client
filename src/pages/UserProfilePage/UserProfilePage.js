@@ -1,6 +1,7 @@
 import "./UserProfilePage.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function UserProfilePage({ setIsUserLoggedIn }) {
   const [user, setUser] = useState(null);
@@ -12,7 +13,6 @@ export default function UserProfilePage({ setIsUserLoggedIn }) {
           Authorization: `Bearer ${token}`,
         },
       });
-    //   console.log(response);
       setUser(response.data);
     };
     fetchProfile();
@@ -33,7 +33,7 @@ export default function UserProfilePage({ setIsUserLoggedIn }) {
           setIsUserLoggedIn(false);
         }}
       >
-        Log out
+        <Link to="/about-us">LOG OUT</Link>
       </button>
     </section>
   );
