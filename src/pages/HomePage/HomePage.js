@@ -84,16 +84,22 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
   };
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      const token = localStorage.getItem("authToken");
-      const response = await axios.get("http://localhost:6060/profile", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data);
-    };
-    fetchProfile();
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      const fetchProfile = async () => {
+        try {
+          const response = await axios.get("http://localhost:6060/profile", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setUser(response.data);
+        } catch (error) {
+          console.error("Error fetching profile:", error);
+        }
+      };
+      fetchProfile();
+    }
   }, []);
 
   return (
