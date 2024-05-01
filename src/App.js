@@ -7,6 +7,7 @@ import AboutUsPage from "./pages/AboutUsPage/AboutUsPage.js";
 import LoginPage from "./pages/LoginPage/LoginPage.js";
 import UserProfilePage from "./pages/UserProfilePage/UserProfilePage.js";
 import JobListPage from "./pages/JobListPage/JobListPage.js";
+import JobDetailpage from "./pages/JobDetailPage/JobDetailPage.js";
 import "./App.scss";
 
 export default function App() {
@@ -53,6 +54,15 @@ export default function App() {
                 }
               />
             ) : null}
+            <Route
+              path="/job-detail/:id"
+              element={
+                <JobDetailpage
+                  isUserLoggedIn={isUserLoggedIn}
+                  setIsUserLoggedIn={setIsUserLoggedIn}
+                />
+              }
+            />
           </Routes>
           <Footer />
         </BrowserRouter>

@@ -1,4 +1,3 @@
-import Header from "../../components/Header/Header.js";
 import "./HomePage.scss";
 import Spline from "@splinetool/react-spline";
 import React, { useState, useEffect } from "react";

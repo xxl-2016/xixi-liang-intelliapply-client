@@ -100,16 +100,6 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                 <h3 className="profile-user__sort--actions">ACTIONS</h3>
               </div>
 
-              {/* <ul>
-                {jobs.jobs.map((job) => (
-                  <li key={job.id}>
-                    <p>Job Title: {job.job_title}</p>
-                    <p>Company: {job.company_name}</p>
-                    <p>Location: {job.location}</p>
-                  </li>
-                ))}
-              </ul> */}
-
               {jobs.jobs.map((job) => (
                 <div key={job.id} className="profile-user__card">
                   <div className="profile-user__card--detail">

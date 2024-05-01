@@ -12,19 +12,27 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
 
   const handleSearch = async () => {
     try {
+      localStorage.removeItem("jobList");
       const response = await axios.get("http://localhost:6060/jobs", {
         params: {
           keywords: keywords || "developer",
         },
       });
-      const updatedJobList = response.data.data;
-      setJobList(updatedJobList);
+      const updatedJobList = response.data.data.map((job) => ({
+        ...job,
+        saved: false,
+      }));
+      localStorage.setItem("jobList", JSON.stringify(updatedJobList));
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
+    const storedJobList = JSON.parse(localStorage.getItem("jobList"));
+    if (storedJobList) {
+      setJobList(storedJobList);
+    }
     const token = localStorage.getItem("authToken");
     if (token) {
       const fetchProfile = async () => {
@@ -53,9 +61,12 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
         location: job.location,
         applied: false,
         followup: 0,
-        post_date: job.postDate,
+        post_date: job.postDate || "No Data",
       });
       alert("Job saved successfully");
+      setJobList((prevJobList) =>
+        prevJobList.map((j) => (j.id === job.id ? { ...j, saved: true } : j))
+      );
       console.log("Saved job:", response.data);
     } catch (error) {
       console.error(error);
@@ -102,7 +113,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
             placeholder="Enter keywords"
             className="jobs-search__input"
           />
-          <button className="jobs-search__button" onClick={handleSearch}>
+          <button className="jobs-search__button" onClick={handleSearch} >
             Search
           </button>
         </div>
@@ -126,7 +137,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
                     JOB TITLE
                   </h3>
                   <Link
-                    to={job.url}
+                    to={`/job-detail/${job.id}`}
                     className="jobs-card__detail--item-heading-info"
                   >
                     {job.title}
@@ -174,7 +185,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
                 >
                   <img
                     className="jobs-card__detail--button-save-img"
-                    src={saveIcon}
+                    src={job.saved ? savedIcon : saveIcon}
                     alt="save"
                   />
                 </button>
