@@ -130,6 +130,7 @@
       margin: 0 5rem;
     }
     &__job {
+      text-align: center;
       &--list {
         @include mobile {
           color: white;

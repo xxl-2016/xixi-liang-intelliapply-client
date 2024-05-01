@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function UserProfilePage({ setIsUserLoggedIn }) {
+export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [user, setUser] = useState(null);
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -28,7 +29,6 @@ export default function UserProfilePage({ setIsUserLoggedIn }) {
         );
         setJobs(jobsResponse.data);
         setLoading(false);
-        console.log(jobsResponse.data);
       } catch (error) {
         console.error("Error fetching profile:", error);
         setLoading(false);
@@ -42,34 +42,142 @@ export default function UserProfilePage({ setIsUserLoggedIn }) {
   }
 
   return (
-    <section className="profile-page">
-      {user ? (
-        <>
-          <h2>Welcome back, {user.username}!</h2>
-          <p>Email: {user.email}</p>
-          <h2>Your Jobs</h2>
-          <ul>
-            {jobs.jobs.map((job) => (
-              <li key={job.id}>
-                <p>Job Title: {job.job_title}</p>
-                <p>Company: {job.company_name}</p>
-                <p>Location: {job.location}</p>
-              </li>
-            ))}
-          </ul>
-          <button
-            className="logout-button"
-            onClick={() => {
-              localStorage.removeItem("authToken");
-              setIsUserLoggedIn(false);
-            }}
-          >
-            <Link to="/about-us">LOG OUT</Link>
-          </button>
-        </>
-      ) : (
-        <p>Loading user details...</p>
-      )}
-    </section>
+    <>
+      <section className="profile">
+        <div className="profile-hero">
+          {isUserLoggedIn ? (
+            <div className="profile-hero__active">
+              <Link to="/about-us" className="profile-hero__active--news">
+                ABOUT US
+              </Link>
+              <img
+                src="#"
+                alt="Avatar"
+                className="profile-hero__active--avatar"
+              />
+              <button
+                className="profile-hero__active--logout"
+                onClick={() => {
+                  localStorage.removeItem("authToken");
+                  setIsUserLoggedIn(false);
+                }}
+              >
+                LOG OUT
+              </button>
+            </div>
+          ) : (
+            <>
+              <Link to="/about-us" className="profile-hero__news">
+                ABOUT US
+              </Link>
+              <button
+                className="profile-hero__logout"
+                onClick={() => {
+                  localStorage.removeItem("authToken");
+                  setIsUserLoggedIn(false);
+                }}
+              >
+                <Link to="/about-us">LOG OUT</Link>
+              </button>
+            </>
+          )}
+        </div>
+        <div className="profile-user">
+          {user ? (
+            <>
+              <div className="profile-user__heading">
+                <h2>Every effort counts, {user.username}!</h2>
+                <h2>Saved Jobs</h2>
+              </div>
+
+              <div className="profile-user__sort">
+                <h3 className="profile-user__sort--heading">JOB TITLE</h3>
+                <h3 className="profile-user__sort--heading">COMPANY</h3>
+                <h3 className="profile-user__sort--heading">FOLLOW UP</h3>
+                <h3 className="profile-user__sort--heading">LOCATION</h3>
+                <h3 className="profile-user__sort--heading">POSTED DATE</h3>
+                <h3 className="profile-user__sort--heading">APPLIED</h3>
+                <h3 className="profile-user__sort--actions">ACTIONS</h3>
+              </div>
+
+              {/* <ul>
+                {jobs.jobs.map((job) => (
+                  <li key={job.id}>
+                    <p>Job Title: {job.job_title}</p>
+                    <p>Company: {job.company_name}</p>
+                    <p>Location: {job.location}</p>
+                  </li>
+                ))}
+              </ul> */}
+
+              {jobs.jobs.map((job) => (
+                <div key={job.id} className="profile-user__card">
+                  <div className="profile-user__card--detail">
+                    <div className="profile-user__card--detail-item">
+                      <h3 className="profile-user__card--detail-item-heading">
+                        JOB TITLE
+                      </h3>
+                      <h3 className="profile-user__card--detail-item-text">
+                        {job.job_title}
+                      </h3>
+                    </div>
+                    <div className="profile-user__card--detail-item">
+                      <h3 className="profile-user__card--detail-item-heading">
+                        COMPANY NAME
+                      </h3>
+                      <h3 className="profile-user__card--detail-item-text">
+                        {job.company_name}
+                      </h3>
+                    </div>
+                    <div className="profile-user__card--detail-item">
+                      <h3 className="profile-user__card--detail-item-heading">
+                        FOLLOW UP
+                      </h3>
+                      <h3 className="profile-user__card--detail-item-text">
+                        {job.followup}
+                      </h3>
+                    </div>
+                    <div className="profile-user__card--detail-item">
+                      <h3 className="profile-user__card--detail-item-heading">
+                        LOCATION
+                      </h3>
+                      <h3 className="profile-user__card--detail-item-text">
+                        {job.location}
+                      </h3>
+                    </div>
+                    <div className="profile-user__card--detail-item">
+                      <h3 className="profile-user__card--detail-item-heading">
+                        POST DATE
+                      </h3>
+                      <h3 className="profile-user__card--detail-item-text">
+                        {job.post_date}
+                      </h3>
+                    </div>
+                    <div className="profile-user__card--detail-item">
+                      <h3 className="profile-user__card--detail-item-heading">
+                        APPLIED
+                      </h3>
+                      <h3 className="profile-user__card--detail-item-text">
+                        {job.applied ? "YES" : "NO"}
+                      </h3>
+                    </div>
+                    <div className="profile-user__card--actions">
+                      <Link
+                        to={`/job/${job.id}`}
+                        className="profile-user__card--actions-link"
+                      >
+                        VIEW
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </>
+          ) : (
+            <p>Loading user details...</p>
+          )}
+        </div>
+      </section>
+    </>
   );
 }

@@ -1,3 +1,134 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/typography" as *;
+
+.profile {
+  &-hero {
+    display: flex;
+    justify-content: space-between;
+    &__active {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      &--news {
+        text-decoration: none;
+        font-size: 0.8rem;
+        padding: 0 1rem;
+        border-radius: 20px;
+        background-color: rgba(#4d3589, 0.2);
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(#4d3589, 0.6);
+        }
+        @include tablet {
+          font-size: 1rem;
+        }
+        @include desktop {
+          font-size: 1.5rem;
+        }
+      }
+      &--avatar {
+        display: none;
+      }
+      &--logout {
+        font-size: 0.8rem;
+        padding: 0 1rem;
+        border-radius: 20px;
+        color: white;
+        border: none;
+        background-color: rgba(#00eaff, 0.1);
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(#00eaff, 0.3);
+        }
+        @include tablet {
+          font-size: 1rem;
+        }
+        @include desktop {
+          font-size: 1.5rem;
+        }
+      }
+    }
+    &__news {
+      text-decoration: none;
+      font-size: 0.8rem;
+      padding: 0 1rem;
+      border-radius: 20px;
+      background-color: rgba(#4d3589, 0.2);
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(#4d3589, 0.6);
+      }
+      @include tablet {
+        font-size: 1rem;
+      }
+      @include desktop {
+        font-size: 1.5rem;
+      }
+    }
+    &__logout {
+      font-size: 0.8rem;
+      padding: 0 1rem;
+      border-radius: 20px;
+      color: white;
+      border: none;
+      background-color: rgba(#00eaff, 0.1);
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(#00eaff, 0.3);
+      }
+      @include tablet {
+        font-size: 1rem;
+      }
+      @include desktop {
+        font-size: 1.5rem;
+      }
+    }
+    @include mobile {
+      margin: 0 1rem;
+    }
+    @include tablet {
+      margin: 0 2rem;
+    }
+    @include desktop {
+      margin: 0 5rem;
+    }
+  }
+
+  &-user {
+    &__sort {
+      @include mobile {
+        display: none;
+      }
+      @include tablet {
+        width: calc(100% - 4rem);
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        margin: 0 2rem;
+        background-color: rgba($light-blue, 0.2);
+        border-radius: 20px;
+        &__heading {
+          padding-right: 1.5rem;
+          color: white;
+        }
+        &__actions {
+          color: white;
+        }
+      }
+      @include desktop {
+        width: calc(100% - 10rem);
+        margin: 0 5rem;
+      }
+    }
+    &__card {
+      &--detail {
+        &-item-heading {
+          @include tablet {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

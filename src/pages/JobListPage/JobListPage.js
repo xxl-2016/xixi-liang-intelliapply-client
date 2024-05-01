@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./JobListPage.scss";
 import { Link } from "react-router-dom";
-import saveIcon from "../../assets/icons/folder.png";
+import saveIcon from "../../assets/icons/bookmark.png";
+import savedIcon from "../../assets/icons/bookmark-2.png";
 
 export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [keywords, setKeywords] = useState("");
   const [jobList, setJobList] = useState([]);
-  const [refresh, setRefresh] = useState(0);
+  const [user, setUser] = useState(null);
 
   const handleSearch = async () => {
     try {
@@ -16,7 +17,46 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
           keywords: keywords || "developer",
         },
       });
-      setJobList(response.data.data);
+      const updatedJobList = response.data.data;
+      setJobList(updatedJobList);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      const fetchProfile = async () => {
+        try {
+          const response = await axios.get("http://localhost:6060/profile", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setUser(response.data);
+        } catch (error) {
+          console.error("Error fetching profile:", error);
+        }
+      };
+      fetchProfile();
+    }
+  }, []);
+
+  const handleSaveJob = async (job) => {
+    try {
+      const response = await axios.post("http://localhost:6060/jobs", {
+        id: job.id,
+        username: user.username,
+        job_title: job.title,
+        company_name: job.company.name,
+        location: job.location,
+        applied: false,
+        followup: 0,
+        post_date: job.postDate,
+      });
+      alert("Job saved successfully");
+      console.log("Saved job:", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -128,7 +168,10 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
                     {job.postDate}
                   </h4>
                 </div>
-                <button className="jobs-card__detail--button-save">
+                <button
+                  className="jobs-card__detail--button-save"
+                  onClick={() => handleSaveJob(job)}
+                >
                   <img
                     className="jobs-card__detail--button-save-img"
                     src={saveIcon}
