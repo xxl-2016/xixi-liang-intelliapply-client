@@ -4,9 +4,8 @@
 
 .aboutus {
   @include mobile {
-    height: 17rem;
+    height: 57rem;
   }
-  margin-top: 40rem;
   &-network {
     &__spline {
       z-index: -10;
