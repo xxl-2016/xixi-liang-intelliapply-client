@@ -82,7 +82,11 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
               <Link to="/about-us" className="jobs-hero__active--news">
                 ABOUT US
               </Link>
-              <img src="#" alt="Avatar" className="jobs-hero__active--avatar" />
+              {user && (
+                <button className="homePage-hero__active--user-avatar">
+                  <Link to="/profile">{user.username.toUpperCase()}</Link>
+                </button>
+              )}
               <button
                 className="jobs-hero__active--logout"
                 onClick={() => {
@@ -113,7 +117,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
             placeholder="Enter keywords"
             className="jobs-search__input"
           />
-          <button className="jobs-search__button" onClick={handleSearch} >
+          <button className="jobs-search__button" onClick={handleSearch}>
             Search
           </button>
         </div>

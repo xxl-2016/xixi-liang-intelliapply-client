@@ -35,7 +35,41 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
       }
     };
     fetchProfile();
-  }, []);
+  }, [refresh]);
+
+  const handleDelete = async (jobId) => {
+    try {
+      const token = localStorage.getItem("authToken");
+      await axios.delete(`http://localhost:6060/jobs/${jobId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("Job deleted successfully");
+      setRefresh(refresh + 1);
+    } catch (error) {
+      console.error("Error deleting job:", error);
+      alert("Failed to delete job");
+    }
+  };
+
+  const handleApply = async (jobId, checked) => {
+    try {
+      const token = localStorage.getItem("authToken");
+      await axios.put(
+        `http://localhost:6060/jobs/${jobId}`,
+        { applied: checked },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setRefresh(refresh + 1);
+    } catch (error) {
+      console.error("Error applying to job:", error);
+    }
+  };
 
   if (loading) {
     return <>Loading user details...</>;
@@ -150,6 +184,12 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                       <h3 className="profile-user__card--detail-item-text">
                         {job.applied ? "YES" : "NO"}
                       </h3>
+                      <input
+                        type="checkbox"
+                        className="profile-user__card--detail-item-checkbox"
+                        checked={job.applied}
+                        onChange={(e) => handleApply(job.id, e.target.checked)}
+                      />
                     </div>
                     <div className="profile-user__card--actions">
                       <Link
@@ -158,6 +198,12 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                       >
                         VIEW
                       </Link>
+                      <button
+                        className="profile-user__card--actions-delete"
+                        onClick={() => handleDelete(job.id)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
                 </div>
