@@ -71,6 +71,42 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
     }
   };
 
+  const handleIncrease = async (jobId, followupNumber) => {
+    try {
+      const token = localStorage.getItem("authToken");
+      await axios.put(
+        `http://localhost:6060/jobs/${jobId}`,
+        { followup: followupNumber + 1 },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setRefresh(refresh + 1);
+    } catch (error) {
+      console.error("Error increasing followup:", error);
+    }
+  };
+
+  const handleDecrease = async (jobId, followupNumber) => {
+    try {
+      const token = localStorage.getItem("authToken");
+      await axios.put(
+        `http://localhost:6060/jobs/${jobId}`,
+        { followup: followupNumber - 1 },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setRefresh(refresh + 1);
+    } catch (error) {
+      console.error("Error decreasing followup:", error);
+    }
+  };
+
   if (loading) {
     return <>Loading user details...</>;
   }
@@ -154,12 +190,24 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                       </h3>
                     </div>
                     <div className="profile-user__card--detail-item">
-                      <h3 className="profile-user__card--detail-item-heading">
+                      <h3 className="profile-user__card--detail-item-headingheading">
                         FOLLOW UP
                       </h3>
                       <h3 className="profile-user__card--detail-item-text">
                         {job.followup}
                       </h3>
+                      <button
+                        className="profile-user__card--detail-item-heading-increase"
+                        onClick={() => handleIncrease(job.id, job.followup)}
+                      >
+                        +
+                      </button>
+                      <button
+                        className="profile-user__card--detail-item-heading-decrease"
+                        onClick={() => handleDecrease(job.id, job.followup)}
+                      >
+                        -
+                      </button>
                     </div>
                     <div className="profile-user__card--detail-item">
                       <h3 className="profile-user__card--detail-item-heading">
