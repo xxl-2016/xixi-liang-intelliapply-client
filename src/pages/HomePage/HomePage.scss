@@ -173,6 +173,7 @@
     }
     &__sign {
       text-align: center;
+      color: white;
       &--button {
         @include mobile {
           margin-top: 18rem;
@@ -199,6 +200,7 @@
       }
       &--input {
         text-align: center;
+        color: white;
         @include mobile {
           margin-top: 18rem;
           width: 60%;
@@ -226,6 +228,7 @@
         align-items: center;
         &-username {
           text-align: center;
+          color: white;
           @include mobile {
             margin-top: 0.5rem;
             width: 60%;
@@ -247,6 +250,7 @@
         }
         &-password {
           text-align: center;
+          color: white;
           @include mobile {
             margin-top: 0.5rem;
             width: 60%;

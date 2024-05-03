@@ -1,6 +1,7 @@
 import "./LoginPage.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Spline from "@splinetool/react-spline";
 
 export default function LoginPage({ setIsUserLoggedIn }) {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function LoginPage({ setIsUserLoggedIn }) {
       const token = authToken.access_token;
       localStorage.setItem("authToken", token);
       setIsUserLoggedIn(true);
-      navigate('/profile');
+      navigate("/profile");
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status === 401) {
@@ -30,12 +31,18 @@ export default function LoginPage({ setIsUserLoggedIn }) {
   return (
     <>
       <section className="login-page">
+        <div className="login-page__spline">
+          <Spline
+            className="homePage-click__network"
+            scene="https://prod.spline.design/u5a12k2nXlnDk7Xj/scene.splinecode"
+          />
+        </div>
         <form className="login-page__form" onSubmit={handleSubmit}>
           <input
             className="login-page__form--username"
             type="text"
             name="username"
-            placeholder="Username or Email"
+            placeholder="Username"
           />
           <input
             className="login-page__form--password"

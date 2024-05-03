@@ -4,11 +4,15 @@
 
 .login-page {
   @include mobile {
-    height: 58rem;
+    height: 54rem;
+    margin-top: 2rem;
   }
-    @include tablet {
-        height: 60rem;
-    }
+  @include tablet {
+    margin-top: 3rem;
+  }
+  @include desktop {
+    margin-top: 5rem;
+  }
   &__form {
     display: flex;
     flex-direction: column;
@@ -20,14 +24,16 @@
       padding: 2rem 0;
     }
     @include tablet {
-      margin: 0 8rem;
+      margin: 0 10rem;
       padding: 2rem 0;
     }
     @include desktop {
-      margin: 0 15rem;
-      padding: 3rem 0;
+      margin: 0 20rem;
+      padding: 5rem 0;
     }
     &--username {
+      text-align: center;
+      color: white;
       @include mobile {
         margin-top: 0.5rem;
         padding: 0.3rem 0;
@@ -41,12 +47,15 @@
       }
       @include tablet {
         font-size: 1rem;
+        width: 60%;
       }
       @include desktop {
         font-size: 1.5rem;
       }
     }
     &--password {
+      text-align: center;
+      color: white;
       @include mobile {
         margin-top: 0.5rem;
         padding: 0.3rem 0;
@@ -60,6 +69,7 @@
       }
       @include tablet {
         font-size: 1rem;
+        width: 60%;
       }
       @include desktop {
         font-size: 1.5rem;
@@ -76,7 +86,7 @@
         color: white;
         cursor: pointer;
         &:hover {
-          background-color: rgba(#00eaff, 0.3);
+          background-color: rgba($purple, 0.3);
         }
       }
       @include tablet {
