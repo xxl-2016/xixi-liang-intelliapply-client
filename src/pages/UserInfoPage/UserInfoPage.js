@@ -335,6 +335,9 @@ export default function UserInfoPage({ isUserLoggedIn, setIsUserLoggedIn }) {
           </>
         )}
       </div>
+      <div>
+        <Link to="/generator">AI-powered Resume and Cover Letter Generator</Link>
+      </div>
     </>
   );
 }
