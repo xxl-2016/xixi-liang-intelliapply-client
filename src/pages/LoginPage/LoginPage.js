@@ -43,12 +43,14 @@ export default function LoginPage({ setIsUserLoggedIn }) {
             type="text"
             name="username"
             placeholder="Username"
+            autoComplete="off"
           />
           <input
             className="login-page__form--password"
             type="password"
             name="password"
             placeholder="Password"
+            autoComplete="off"
           />
           <button className="login-page__form--submit">Submit</button>
         </form>

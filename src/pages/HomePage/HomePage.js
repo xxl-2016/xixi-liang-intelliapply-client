@@ -123,6 +123,7 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                   onClick={() => {
                     localStorage.removeItem("authToken");
                     setIsUserLoggedIn(false);
+                    alert("Log out successfully");
                   }}
                 >
                   <Link to="/about-us">LOG OUT</Link>
