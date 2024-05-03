@@ -242,10 +242,10 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                     </div>
                     <div className="profile-user__card--actions">
                       <Link
-                        to={`/job/${job.id}`}
+                        to={`/job-detail/${job.id}`}
                         className="profile-user__card--actions-link"
                       >
-                        VIEW
+                        VIEW/APPLY
                       </Link>
                       <button
                         className="profile-user__card--actions-delete"

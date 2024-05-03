@@ -4,6 +4,7 @@ import facebook from "../../assets/icons/Icon-facebook.svg";
 import twitter from "../../assets/icons/Icon-twitter.svg";
 import instagram from "../../assets/icons/Icon-instagram.svg";
 import Spline from "@splinetool/react-spline";
+import SubscriptionPlan from "../../components/SubscriptionPlan/SubscriptionPlan";
 
 export default function AboutUsPage() {
   return (
@@ -15,38 +16,7 @@ export default function AboutUsPage() {
             scene="https://prod.spline.design/u5a12k2nXlnDk7Xj/scene.splinecode"
           />
         </div>
-        <div className="pricing-cards">
-          <div className="pricing-card">
-            <h2>Basic</h2>
-            <p>$0.00 / mo</p>
-            <ul>
-              <li>Currently Subscribed</li>
-              <li>Manage And View Usage</li>
-            </ul>
-          </div>
-          <div className="pricing-card">
-            <h2>Pro</h2>
-            <p>$5.00 / mo</p>
-            <ul>
-              <li>Change Plan</li>
-            </ul>
-          </div>
-          <div className="pricing-card">
-            <h2>Ultra</h2>
-            <p>$8.00 / mo</p>
-            <ul>
-              <li>Change Plan</li>
-            </ul>
-          </div>
-          <div className="pricing-card recommended">
-            <h2>Mega</h2>
-            <p>$50.00 / mo</p>
-            <ul>
-              <li>Change Plan</li>
-              <li>Recommended</li>
-            </ul>
-          </div>
-        </div>
+        {SubscriptionPlan()}
         <div className="aboutus-thanks">
           <h1 className="aboutus-thanks__text">Thanks for visiting our site</h1>
         </div>

@@ -9,6 +9,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [keywords, setKeywords] = useState("");
   const [jobList, setJobList] = useState([]);
   const [user, setUser] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   const handleSearch = async () => {
     try {
@@ -49,7 +50,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
       };
       fetchProfile();
     }
-  }, []);
+  }, [refresh]);
 
   const handleSaveJob = async (job) => {
     try {
@@ -68,6 +69,27 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
         prevJobList.map((j) => (j.id === job.id ? { ...j, saved: true } : j))
       );
       console.log("Saved job:", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSaveButtonClick = (job) => {
+    if (job.saved) {
+      handleDelete(job);
+    } else {
+      handleSaveJob(job);
+    }
+  };
+
+  const handleDelete = async (job) => {
+    try {
+      await axios.delete(`http://localhost:6060/jobs/${job.id}`);
+      const updatedJobList = jobList.map((j) =>
+        j.id === job.id ? { ...j, saved: false } : j
+      );
+      setJobList(updatedJobList);
+      console.log("Removed saved job:", job.title);
     } catch (error) {
       console.error(error);
     }
@@ -185,7 +207,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
                 </div>
                 <button
                   className="jobs-card__detail--button-save"
-                  onClick={() => handleSaveJob(job)}
+                  onClick={() => handleSaveButtonClick(job)}
                 >
                   <img
                     className="jobs-card__detail--button-save-img"

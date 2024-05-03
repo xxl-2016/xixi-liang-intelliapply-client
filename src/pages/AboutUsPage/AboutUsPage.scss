@@ -3,9 +3,6 @@
 @use "../../styles/partials/typography" as *;
 
 .aboutus {
-  @include mobile {
-    height: 57rem;
-  }
   &-network {
     &__spline {
       z-index: -10;

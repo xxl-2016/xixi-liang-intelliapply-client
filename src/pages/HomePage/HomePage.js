@@ -3,6 +3,7 @@ import Spline from "@splinetool/react-spline";
 import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import SubScriptionPlan from "../../components/SubscriptionPlan/SubscriptionPlan";
 
 export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [isExpandedSignUp, setIsExpandedSignUp] = useState(false);
@@ -142,7 +143,7 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
         <div className="homePage-hero__job">
           {isUserLoggedIn ? (
             <Link to="/job-list" className="homePage-hero__job--list">
-              JOB LIST
+              Search Jobs
             </Link>
           ) : null}
         </div>
@@ -160,6 +161,7 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                 name="email"
                 value={email}
                 onChange={handleInputChange}
+                autoComplete="off"
               />
             ) : (
               !isUserLoggedIn && (
@@ -180,6 +182,7 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                   name="username"
                   onChange={handleInputChange}
                   value={username}
+                  autoComplete="off"
                 />
                 <input
                   className="homePage-click__sign--expanded-password"
@@ -188,6 +191,7 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                   name="password"
                   onChange={handleInputChange}
                   value={password}
+                  autoComplete="off"
                 />
                 <button
                   className="homePage-click__sign--expanded-submit"
@@ -214,6 +218,15 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
           </ul>
           <p className="homePage-API__title">02</p>
         </div>
+
+        <div className="homePage-AI">
+          <p className="homePage-AI__title">03</p>
+          <h1 className="homePage-AI__text">
+            AI Powered Resume and Cover Letter Builder.
+          </h1>
+        </div>
+
+        {SubScriptionPlan()}
       </section>
     </>
   );

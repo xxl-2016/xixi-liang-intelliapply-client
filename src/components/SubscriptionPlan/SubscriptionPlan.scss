@@ -1,0 +1,73 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+
+.subscription {
+  &-pricing {
+    @include mobile {
+      flex-direction: column;
+      margin: 1rem;
+      padding: 1rem;
+      border-radius: 20px;
+      background-color: rgba($blue, 0.2);
+      text-align: center;
+
+      &__heading {
+        color: $white;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      &__price {
+        color: $white;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        &-ad {
+          color: $white;
+          font-size: 1rem;
+          list-style-type: none;
+          margin-bottom: 0.3rem;
+        }
+        &-button {
+          padding: 0 1rem;
+          border-radius: 20px;
+          color: white;
+          border: none;
+          background-color: rgba($dark-blue, 0.1);
+          cursor: pointer;
+          &:hover {
+            background-color: rgba($purple, 0.3);
+          }
+        }
+      }
+    }
+    @include tablet {
+      margin: 3rem 5rem;
+      &__heading {
+        font-size: 2rem;
+      }
+      &__price {
+        font-size: 1.5rem;
+        &-ad {
+          font-size: 1.2rem;
+          margin-top: 0.5rem;
+        }
+        &-button {
+          font-size: 1.2rem;
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+  @include desktop {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 7rem 0;
+    &-pricing {
+      margin: 2rem;
+      width: 40%;
+    }
+  }
+}

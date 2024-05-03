@@ -7,7 +7,6 @@ export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [user, setUser] = useState(null);
   const [resumeData, setResumeData] = useState(null);
   const [coverLetterData, setCoverLetterData] = useState(null);
-  const [refresh, setRefresh] = useState(0);
   const [showResume, setShowResume] = useState(false);
   const [showCoverLetter, setShowCoverLetter] = useState(false);
 
@@ -26,7 +25,7 @@ export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
       }
     };
     fetchProfile();
-  }, [refresh]);
+  }, []);
 
   const handleResume = async () => {
     try {

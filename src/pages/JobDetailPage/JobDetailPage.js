@@ -45,25 +45,6 @@ export default function JobDetailPage({ isUserLoggedIn, setIsUserLoggedIn }) {
     fetchJob();
   }, []);
 
-  const handleSaveJob = async () => {
-    try {
-      const response = await axios.post("http://localhost:6060/jobs", {
-        id: job.id,
-        username: user.username,
-        job_title: job.title,
-        company_name: job.company.name,
-        location: job.location,
-        applied: false,
-        followup: 0,
-        post_date: job.postDate || "No Data",
-      });
-      alert("Job saved successfully");
-      console.log("Saved job:", response.data);
-    } catch (error) {
-      console.error("Error saving job:", error);
-    }
-  };
-
   return (
     <div className="JobDetailPage">
       <Link to="/job-list" className="back-link">
@@ -85,7 +66,6 @@ export default function JobDetailPage({ isUserLoggedIn, setIsUserLoggedIn }) {
           <p>{job.location}</p>
           <p>{job.description}</p>
           <p>{job.skills}</p>
-          <button onClick={handleSaveJob}>Save job</button>
         </>
       ) : (
         <p>Loading...</p>
