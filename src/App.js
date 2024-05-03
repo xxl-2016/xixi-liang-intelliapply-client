@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage/LoginPage.js";
 import UserProfilePage from "./pages/UserProfilePage/UserProfilePage.js";
 import JobListPage from "./pages/JobListPage/JobListPage.js";
 import JobDetailpage from "./pages/JobDetailPage/JobDetailPage.js";
+import GeneratorPage from "./pages/GeneratorPage/GeneratorPage.js";
+import UserInfoPage from "./pages/UserInfoPage/UserInfoPage.js";
 import "./App.scss";
 
 export default function App() {
@@ -63,6 +65,28 @@ export default function App() {
                 />
               }
             />
+            {isUserLoggedIn ? (
+              <Route
+                path="/generator"
+                element={
+                  <GeneratorPage
+                    isUserLoggedIn={isUserLoggedIn}
+                    setIsUserLoggedIn={setIsUserLoggedIn}
+                  />
+                }
+              />
+            ) : null}
+            {isUserLoggedIn ? (
+              <Route
+                path="/user-info"
+                element={
+                  <UserInfoPage
+                    isUserLoggedIn={isUserLoggedIn}
+                    setIsUserLoggedIn={setIsUserLoggedIn}
+                  />
+                }
+              />
+            ) : null}
           </Routes>
           <Footer />
         </BrowserRouter>

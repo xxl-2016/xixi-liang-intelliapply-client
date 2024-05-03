@@ -156,6 +156,7 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
           {user ? (
             <>
               <div className="profile-user__heading">
+                <Link to="/user-info">Personal Info</Link>
                 <h2>Every effort counts, {user.username}!</h2>
                 <h2>Saved Jobs</h2>
               </div>
