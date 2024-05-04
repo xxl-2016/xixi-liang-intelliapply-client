@@ -4,6 +4,7 @@ import "./JobListPage.scss";
 import { Link } from "react-router-dom";
 import saveIcon from "../../assets/icons/bookmark.png";
 import savedIcon from "../../assets/icons/bookmark-2.png";
+import Hero from "../../components/Hero/Hero";
 
 export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [keywords, setKeywords] = useState("");
@@ -24,6 +25,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
         saved: false,
       }));
       localStorage.setItem("jobList", JSON.stringify(updatedJobList));
+      setRefresh(refresh + 1);
     } catch (error) {
       console.error(error);
     }
@@ -98,39 +100,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
   return (
     <>
       <section className="jobs">
-        <div className="jobs-hero">
-          {isUserLoggedIn ? (
-            <div className="jobs-hero__active">
-              <Link to="/about-us" className="jobs-hero__active--news">
-                ABOUT US
-              </Link>
-              {user && (
-                <button className="homePage-hero__active--user-avatar">
-                  <Link to="/profile">{user.username.toUpperCase()}</Link>
-                </button>
-              )}
-              <button
-                className="jobs-hero__active--logout"
-                onClick={() => {
-                  localStorage.removeItem("authToken");
-                  setIsUserLoggedIn(false);
-                }}
-              >
-                LOG OUT
-              </button>
-            </div>
-          ) : (
-            <>
-              <Link to="/about-us" className="jobs-hero__news">
-                ABOUT US
-              </Link>
-              <Link to="/login" className="jobs-hero__login">
-                LOGIN
-              </Link>
-            </>
-          )}
-        </div>
-
+        {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
         <div className="jobs-search">
           <input
             type="text"
@@ -138,6 +108,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
             onChange={(e) => setKeywords(e.target.value)}
             placeholder="Enter keywords"
             className="jobs-search__input"
+            autoComplete="off"
           />
           <button className="jobs-search__button" onClick={handleSearch}>
             Search

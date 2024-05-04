@@ -2,6 +2,7 @@ import "./GeneratorPage.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Hero from "../../components/Hero/Hero";
 
 export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [user, setUser] = useState(null);
@@ -66,40 +67,7 @@ export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
 
   return (
     <>
-      <div className="generator-hero">
-        {isUserLoggedIn ? (
-          <div className="generator-hero__active">
-            <Link to="/about-us" className="generator-hero__active--news">
-              ABOUT US
-            </Link>
-            <div className="generator-hero__active--user">
-              {user && (
-                <button className="generator-hero__active--user-avatar">
-                  <Link to="/profile">{user.username.toUpperCase()}</Link>
-                </button>
-              )}
-              <button
-                className="generator-hero__active--user-logout"
-                onClick={() => {
-                  localStorage.removeItem("authToken");
-                  setIsUserLoggedIn(false);
-                }}
-              >
-                <Link to="/about-us">LOG OUT</Link>
-              </button>
-            </div>
-          </div>
-        ) : (
-          <>
-            <Link to="/about-us" className="generator-hero__news">
-              ABOUT US
-            </Link>
-            <Link to="/login" className="generator-hero__login">
-              LOGIN
-            </Link>
-          </>
-        )}
-      </div>
+      {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
       <div>
         <h1>Resume Generator</h1>
         <button onClick={handleResume}>Generate</button>

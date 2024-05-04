@@ -2,11 +2,11 @@ import "./UserProfilePage.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Hero from "../../components/Hero/Hero";
 
 export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [user, setUser] = useState(null);
   const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
@@ -28,10 +28,8 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
           }
         );
         setJobs(jobsResponse.data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching profile:", error);
-        setLoading(false);
       }
     };
     fetchProfile();
@@ -107,51 +105,10 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
     }
   };
 
-  if (loading) {
-    return <>Loading user details...</>;
-  }
-
   return (
     <>
       <section className="profile">
-        <div className="profile-hero">
-          {isUserLoggedIn ? (
-            <div className="profile-hero__active">
-              <Link to="/about-us" className="profile-hero__active--news">
-                ABOUT US
-              </Link>
-              <img
-                src="#"
-                alt="Avatar"
-                className="profile-hero__active--avatar"
-              />
-              <button
-                className="profile-hero__active--logout"
-                onClick={() => {
-                  localStorage.removeItem("authToken");
-                  setIsUserLoggedIn(false);
-                }}
-              >
-                LOG OUT
-              </button>
-            </div>
-          ) : (
-            <>
-              <Link to="/about-us" className="profile-hero__news">
-                ABOUT US
-              </Link>
-              <button
-                className="profile-hero__logout"
-                onClick={() => {
-                  localStorage.removeItem("authToken");
-                  setIsUserLoggedIn(false);
-                }}
-              >
-                <Link to="/about-us">LOG OUT</Link>
-              </button>
-            </>
-          )}
-        </div>
+        {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
         <div className="profile-user">
           {user ? (
             <>
@@ -171,92 +128,96 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                 <h3 className="profile-user__sort--actions">ACTIONS</h3>
               </div>
 
-              {jobs.jobs.map((job) => (
-                <div key={job.id} className="profile-user__card">
-                  <div className="profile-user__card--detail">
-                    <div className="profile-user__card--detail-item">
-                      <h3 className="profile-user__card--detail-item-heading">
-                        JOB TITLE
-                      </h3>
-                      <h3 className="profile-user__card--detail-item-text">
-                        {job.job_title}
-                      </h3>
-                    </div>
-                    <div className="profile-user__card--detail-item">
-                      <h3 className="profile-user__card--detail-item-heading">
-                        COMPANY NAME
-                      </h3>
-                      <h3 className="profile-user__card--detail-item-text">
-                        {job.company_name}
-                      </h3>
-                    </div>
-                    <div className="profile-user__card--detail-item">
-                      <h3 className="profile-user__card--detail-item-headingheading">
-                        FOLLOW UP
-                      </h3>
-                      <h3 className="profile-user__card--detail-item-text">
-                        {job.followup}
-                      </h3>
-                      <button
-                        className="profile-user__card--detail-item-heading-increase"
-                        onClick={() => handleIncrease(job.id, job.followup)}
-                      >
-                        +
-                      </button>
-                      <button
-                        className="profile-user__card--detail-item-heading-decrease"
-                        onClick={() => handleDecrease(job.id, job.followup)}
-                      >
-                        -
-                      </button>
-                    </div>
-                    <div className="profile-user__card--detail-item">
-                      <h3 className="profile-user__card--detail-item-heading">
-                        LOCATION
-                      </h3>
-                      <h3 className="profile-user__card--detail-item-text">
-                        {job.location}
-                      </h3>
-                    </div>
-                    <div className="profile-user__card--detail-item">
-                      <h3 className="profile-user__card--detail-item-heading">
-                        POST DATE
-                      </h3>
-                      <h3 className="profile-user__card--detail-item-text">
-                        {job.post_date}
-                      </h3>
-                    </div>
-                    <div className="profile-user__card--detail-item">
-                      <h3 className="profile-user__card--detail-item-heading">
-                        APPLIED
-                      </h3>
-                      <h3 className="profile-user__card--detail-item-text">
-                        {job.applied ? "YES" : "NO"}
-                      </h3>
-                      <input
-                        type="checkbox"
-                        className="profile-user__card--detail-item-checkbox"
-                        checked={job.applied}
-                        onChange={(e) => handleApply(job.id, e.target.checked)}
-                      />
-                    </div>
-                    <div className="profile-user__card--actions">
-                      <Link
-                        to={`/job-detail/${job.id}`}
-                        className="profile-user__card--actions-link"
-                      >
-                        VIEW/APPLY
-                      </Link>
-                      <button
-                        className="profile-user__card--actions-delete"
-                        onClick={() => handleDelete(job.id)}
-                      >
-                        Delete
-                      </button>
+              {jobs &&
+                jobs.jobs &&
+                jobs.jobs.map((job) => (
+                  <div key={job.id} className="profile-user__card">
+                    <div className="profile-user__card--detail">
+                      <div className="profile-user__card--detail-item">
+                        <h3 className="profile-user__card--detail-item-heading">
+                          JOB TITLE
+                        </h3>
+                        <h3 className="profile-user__card--detail-item-text">
+                          {job.job_title}
+                        </h3>
+                      </div>
+                      <div className="profile-user__card--detail-item">
+                        <h3 className="profile-user__card--detail-item-heading">
+                          COMPANY NAME
+                        </h3>
+                        <h3 className="profile-user__card--detail-item-text">
+                          {job.company_name}
+                        </h3>
+                      </div>
+                      <div className="profile-user__card--detail-item">
+                        <h3 className="profile-user__card--detail-item-headingheading">
+                          FOLLOW UP
+                        </h3>
+                        <h3 className="profile-user__card--detail-item-text">
+                          {job.followup}
+                        </h3>
+                        <button
+                          className="profile-user__card--detail-item-heading-increase"
+                          onClick={() => handleIncrease(job.id, job.followup)}
+                        >
+                          +
+                        </button>
+                        <button
+                          className="profile-user__card--detail-item-heading-decrease"
+                          onClick={() => handleDecrease(job.id, job.followup)}
+                        >
+                          -
+                        </button>
+                      </div>
+                      <div className="profile-user__card--detail-item">
+                        <h3 className="profile-user__card--detail-item-heading">
+                          LOCATION
+                        </h3>
+                        <h3 className="profile-user__card--detail-item-text">
+                          {job.location}
+                        </h3>
+                      </div>
+                      <div className="profile-user__card--detail-item">
+                        <h3 className="profile-user__card--detail-item-heading">
+                          POST DATE
+                        </h3>
+                        <h3 className="profile-user__card--detail-item-text">
+                          {job.post_date}
+                        </h3>
+                      </div>
+                      <div className="profile-user__card--detail-item">
+                        <h3 className="profile-user__card--detail-item-heading">
+                          APPLIED
+                        </h3>
+                        <h3 className="profile-user__card--detail-item-text">
+                          {job.applied ? "YES" : "NO"}
+                        </h3>
+                        <input
+                          type="checkbox"
+                          className="profile-user__card--detail-item-checkbox"
+                          checked={job.applied}
+                          onChange={(e) =>
+                            handleApply(job.id, e.target.checked)
+                          }
+                        />
+                      </div>
+                      <div className="profile-user__card--actions">
+                        <Link
+                          to={`/job-detail/${job.id}`}
+                          className="profile-user__card--actions-link"
+                        >
+                          VIEW/APPLY
+                        </Link>
+                        <button
+                          className="profile-user__card--actions-delete"
+                          onClick={() => handleDelete(job.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </>
           ) : (
             <p>Loading user details...</p>

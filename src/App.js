@@ -32,7 +32,15 @@ export default function App() {
                 />
               }
             />
-            <Route path="/about-us" element={<AboutUsPage />} />
+            <Route
+              path="/about-us"
+              element={
+                <AboutUsPage
+                  isUserLoggedIn={isUserLoggedIn}
+                  setIsUserLoggedIn={setIsUserLoggedIn}
+                />
+              }
+            />
             <Route
               path="/login"
               element={<LoginPage setIsUserLoggedIn={setIsUserLoggedIn} />}
@@ -41,7 +49,10 @@ export default function App() {
               <Route
                 path="/profile"
                 element={
-                  <UserProfilePage setIsUserLoggedIn={setIsUserLoggedIn} />
+                  <UserProfilePage
+                    isUserLoggedIn={isUserLoggedIn}
+                    setIsUserLoggedIn={setIsUserLoggedIn}
+                  />
                 }
               />
             ) : null}

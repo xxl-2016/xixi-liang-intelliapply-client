@@ -42,7 +42,7 @@
       }
     }
     @include tablet {
-      margin: 3rem 5rem;
+      margin: 2rem;
       &__heading {
         font-size: 2rem;
       }
@@ -64,10 +64,10 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 7rem 0;
+    margin: 5rem 0;
     &-pricing {
       margin: 2rem;
-      width: 40%;
+      width: 41%;
     }
   }
 }

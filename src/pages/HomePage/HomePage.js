@@ -4,12 +4,12 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import SubScriptionPlan from "../../components/SubscriptionPlan/SubscriptionPlan";
+import Hero from "../../components/Hero/Hero";
 
 export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [isExpandedSignUp, setIsExpandedSignUp] = useState(false);
   const [isExpandedLogin, setIsExpandedLogin] = useState(false);
   const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
-  const [user, setUser] = useState(null);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -83,64 +83,11 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      const fetchProfile = async () => {
-        try {
-          const response = await axios.get("http://localhost:6060/profile", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setUser(response.data);
-        } catch (error) {
-          console.error("Error fetching profile:", error);
-        }
-      };
-      fetchProfile();
-    }
-  }, []);
-
   return (
     <>
       {isSignUpSuccess && <Navigate to="/login" />}
       <section className="homePage">
-        <div className="homePage-hero">
-          {isUserLoggedIn ? (
-            <div className="homePage-hero__active">
-              <Link to="/about-us" className="homePage-hero__active--news">
-                ABOUT US
-              </Link>
-              <div className="homePage-hero__active--user">
-                {user && (
-                  <button className="homePage-hero__active--user-avatar">
-                    <Link to="/profile">{user.username.toUpperCase()}</Link>
-                  </button>
-                )}
-                <button
-                  className="homePage-hero__active--user-logout"
-                  onClick={() => {
-                    localStorage.removeItem("authToken");
-                    setIsUserLoggedIn(false);
-                    alert("Log out successfully");
-                  }}
-                >
-                  <Link to="/about-us">LOG OUT</Link>
-                </button>
-              </div>
-            </div>
-          ) : (
-            <>
-              <Link to="/about-us" className="homePage-hero__news">
-                ABOUT US
-              </Link>
-              <Link to="/login" className="homePage-hero__login">
-                LOGIN
-              </Link>
-            </>
-          )}
-        </div>
+        {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
         <div className="homePage-hero__job">
           {isUserLoggedIn ? (
             <Link to="/job-list" className="homePage-hero__job--list">

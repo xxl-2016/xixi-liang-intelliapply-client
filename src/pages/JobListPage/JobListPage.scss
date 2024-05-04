@@ -3,98 +3,6 @@
 @use "../../styles/partials/typography" as *;
 
 .jobs {
-  &-hero {
-    display: flex;
-    justify-content: space-between;
-    &__active {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      &--news {
-        text-decoration: none;
-        font-size: 0.8rem;
-        padding: 0 1rem;
-        border-radius: 20px;
-        background-color: rgba(#4d3589, 0.2);
-        cursor: pointer;
-        &:hover {
-          background-color: rgba(#4d3589, 0.6);
-        }
-        @include tablet {
-          font-size: 1rem;
-        }
-        @include desktop {
-          font-size: 1.5rem;
-        }
-      }
-      &--avatar {
-        display: none;
-      }
-      &--logout {
-        font-size: 0.8rem;
-        padding: 0 1rem;
-        border-radius: 20px;
-        color: white;
-        border: none;
-        background-color: rgba(#00eaff, 0.1);
-        cursor: pointer;
-        &:hover {
-          background-color: rgba(#00eaff, 0.3);
-        }
-        @include tablet {
-          font-size: 1rem;
-        }
-        @include desktop {
-          font-size: 1.5rem;
-        }
-      }
-    }
-    &__news {
-      text-decoration: none;
-      font-size: 0.8rem;
-      padding: 0 1rem;
-      border-radius: 20px;
-      background-color: rgba(#4d3589, 0.2);
-      cursor: pointer;
-      &:hover {
-        background-color: rgba(#4d3589, 0.6);
-      }
-      @include tablet {
-        font-size: 1rem;
-      }
-      @include desktop {
-        font-size: 1.5rem;
-      }
-    }
-    &__login {
-      font-size: 0.8rem;
-      padding: 0 1rem;
-      border-radius: 20px;
-      color: white;
-      border: none;
-      background-color: rgba(#00eaff, 0.1);
-      cursor: pointer;
-      &:hover {
-        background-color: rgba(#00eaff, 0.3);
-      }
-      @include tablet {
-        font-size: 1rem;
-      }
-      @include desktop {
-        font-size: 1.5rem;
-      }
-    }
-    @include mobile {
-      margin: 0 1rem;
-    }
-    @include tablet {
-      margin: 0 2rem;
-    }
-    @include desktop {
-      margin: 0 5rem;
-    }
-  }
-
   &-search {
     display: flex;
     flex-direction: column;
@@ -299,14 +207,18 @@
     @include tablet {
       margin: 2rem;
       &__detail {
+        align-items: center;
         flex-wrap: nowrap;
         margin: 0;
         justify-content: space-between;
+        padding: 0.5rem 0;
         &--item {
           display: flex;
+          align-items: center;
           flex-direction: row;
           justify-content: space-between;
-          width: 16rem;
+          text-align: en;
+          width: 18rem;
           margin-left: 1rem;
           &-heading {
             width: 100%;
@@ -321,13 +233,13 @@
             &-company {
               width: fit-content;
               color: $white;
-              margin-left: 1.5rem
+              margin-left: 1rem;
             }
           }
         }
         &--type {
           display: flex;
-          margin-left: 3rem;
+          margin-left: 1rem;
           &-heading {
             display: flex;
             align-items: center;
@@ -362,6 +274,7 @@
           text-align: right;
           width: 45%;
           margin: 0;
+          height: 1.5rem;
           align-items: flex-start;
           &-heading {
             &-text {
@@ -384,6 +297,9 @@
           &-heading {
             &-info {
               width: 8rem;
+            }
+            &-company {
+              margin-left: 2rem;
             }
           }
         }

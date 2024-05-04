@@ -2,6 +2,7 @@ import "./UserInfoPage.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Hero from "../../components/Hero/Hero";
 
 export default function UserInfoPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [user, setUser] = useState(null);
@@ -104,40 +105,7 @@ export default function UserInfoPage({ isUserLoggedIn, setIsUserLoggedIn }) {
 
   return (
     <>
-      <div className="info-hero">
-        {isUserLoggedIn ? (
-          <div className="info-hero__active">
-            <Link to="/about-us" className="info-hero__active--news">
-              ABOUT US
-            </Link>
-            <div className="info-hero__active--user">
-              {user && (
-                <button className="info-hero__active--user-avatar">
-                  <Link to="/profile">{user.username.toUpperCase()}</Link>
-                </button>
-              )}
-              <button
-                className="info-hero__active--user-logout"
-                onClick={() => {
-                  localStorage.removeItem("authToken");
-                  setIsUserLoggedIn(false);
-                }}
-              >
-                <Link to="/about-us">LOG OUT</Link>
-              </button>
-            </div>
-          </div>
-        ) : (
-          <>
-            <Link to="/about-us" className="info-hero__news">
-              ABOUT US
-            </Link>
-            <Link to="/login" className="info-hero__login">
-              LOGIN
-            </Link>
-          </>
-        )}
-      </div>
+      {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
       <div className="info-input">
         {infoResponse ? (
           <>

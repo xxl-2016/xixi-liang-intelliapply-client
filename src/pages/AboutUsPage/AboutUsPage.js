@@ -5,11 +5,13 @@ import twitter from "../../assets/icons/Icon-twitter.svg";
 import instagram from "../../assets/icons/Icon-instagram.svg";
 import Spline from "@splinetool/react-spline";
 import SubscriptionPlan from "../../components/SubscriptionPlan/SubscriptionPlan";
+import Hero from "../../components/Hero/Hero";
 
-export default function AboutUsPage() {
+export default function AboutUsPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   return (
     <>
       <section className="aboutus">
+      {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
         <div className="aboutus-network">
           <Spline
             className="aboutus-network__spline"
