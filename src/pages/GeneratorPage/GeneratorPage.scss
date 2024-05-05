@@ -46,7 +46,7 @@
   }
   &-cover {
     @include mobile {
-      margin: 2rem 1rem;
+      margin: 1rem;
     }
     &__button {
       color: $white;
@@ -68,6 +68,28 @@
       white-space: pre-wrap;
       color: $white;
       background-color: rgba($purple, 0.2);
+    }
+    &__heading {
+      color: $white;
+      width: 80%;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    &__job {
+      display: flex;
+      margin-bottom: 1rem;
+      align-items: flex-end;
+      &--title {
+        color: $white;
+        font-size: 1rem;
+        font-weight: 200;
+        width: 80%;
+      }
+      &--checkbox {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
     }
     @include tablet {
       margin: 2rem 2rem;

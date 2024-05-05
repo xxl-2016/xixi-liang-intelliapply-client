@@ -7,9 +7,11 @@ import SplineNetwork from "../../components/SplineNetwork/SplineNetwork";
 export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [user, setUser] = useState(null);
   const [resumeData, setResumeData] = useState(null);
+  const [jobs, setJobs] = useState([]);
   const [coverLetterData, setCoverLetterData] = useState(null);
   const [showResume, setShowResume] = useState(false);
   const [showCoverLetter, setShowCoverLetter] = useState(false);
+  const [selectedJobId, setSelectedJobId] = useState(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -21,6 +23,18 @@ export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
           },
         });
         setUser(userResponse.data);
+        const username = userResponse.data.username;
+        const jobsResponse = await axios.get(
+          `http://localhost:6060/saved?username=${username}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setJobs(jobsResponse.data);
+        console.log(jobs);
       } catch (error) {
         console.log(error);
       }
@@ -48,8 +62,13 @@ export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
 
   const handleCoverLetter = async () => {
     try {
+      if (!selectedJobId) {
+        console.log("Please select a job.");
+        return;
+      }
+
       const coverLetterResponse = await axios.get(
-        `http://localhost:6060/cover?username=${user.username}`,
+        `http://localhost:6060/cover?username=${user.username}&jobId=${selectedJobId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -63,6 +82,10 @@ export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleCheckboxChange = (jobId) => {
+    setSelectedJobId(jobId);
   };
 
   return (
@@ -83,6 +106,20 @@ export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
           )}
         </div>
         <div className="generator-cover">
+          <h2 className="generator-cover__heading">
+            Generate Cover Letter for Specific Job
+          </h2>
+          {jobs.map((job) => (
+            <div key={job.id} className="generator-cover__job">
+              <h3 className="generator-cover__job--title">{job.job_title}</h3>
+              <input
+                type="checkbox"
+                className="generator-cover__job--checkbox"
+                checked={selectedJobId === job.id}
+                onChange={() => handleCheckboxChange(job.id)}
+              />
+            </div>
+          ))}
           <button
             className="generator-cover__button"
             onClick={handleCoverLetter}
