@@ -168,4 +168,6 @@ JWT-based authentication for user accounts.
 
 ## Contact Information
 For any inquiries or assistance, please feel free to reach out via email at: lxx260905@gmail.com# xixi-liang-IntelliApplyPro-client
-# xixi-liang-intelliapply-client
+
+# xixi-liang-intelliapply-server
+https://github.com/xxl-2016/xixi-liang-intelliapply-server
