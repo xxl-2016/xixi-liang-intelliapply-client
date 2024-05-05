@@ -32,6 +32,16 @@
         font-weight: 600;
         color: $dark-blue;
       }
+      &__link {
+        color: $white;
+        font-size: 1rem;
+        font-weight: 200;
+        background-color: rgba($dark-blue, 0.2);
+        text-align: center;
+        width: fit-content;
+        padding: 0 1rem;
+        border-radius: 40px;
+      }
     }
   }
   @include tablet {

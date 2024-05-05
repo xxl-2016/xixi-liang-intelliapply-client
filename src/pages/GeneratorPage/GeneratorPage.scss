@@ -3,6 +3,7 @@
 @use "../../styles/partials/typography" as *;
 
 .generator {
+  height: 280rem;
   &-resume {
     @include mobile {
       margin: 2rem 1rem;

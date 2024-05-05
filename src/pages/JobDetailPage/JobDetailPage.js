@@ -69,7 +69,7 @@ export default function JobDetailPage({ isUserLoggedIn, setIsUserLoggedIn }) {
               <p className="detail-info__text">{job.workPlace}</p>
               <h2 className="detail-info__subheading">Location:</h2>
               <p className="detail-info__text">{job.location}</p>
-              <Link to={job.url}>View</Link>
+              <Link className="detail-info__link" to={job.url}>View</Link>
               <h2 className="detail-info__subheading">Company Name:</h2>
               <p className="detail-info__text">{job.company.name}</p>
               <h2 className="detail-info__subheading">Industries:</h2>

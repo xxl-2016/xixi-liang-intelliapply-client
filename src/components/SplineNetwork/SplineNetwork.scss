@@ -1,0 +1,16 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+
+.spline-network {
+  &__spline {
+    z-index: -10;
+    @include mobile {
+      position: absolute;
+      top: -20%;
+    }
+    @include desktop {
+      top: -20%;
+    }
+  }
+}

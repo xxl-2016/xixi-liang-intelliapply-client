@@ -47,10 +47,45 @@
         font-weight: 600;
         color: $dark-blue;
       }
+      &__form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0.5rem;
+        &--input {
+          margin-top: 0.5rem;
+          width: 100%;
+          background-color: rgba(#00eaff, 0.1);
+          border: none;
+          border-radius: 40px;
+          &::placeholder {
+            color: $white;
+          }
+          &-button {
+            background-color: rgba(#00eaff, 0.1);
+            width: fit-content;
+            color: $white;
+            border: $purple 1px solid;
+            border-radius: 40px;
+            padding: 0.1rem 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 200;
+            cursor: pointer;
+            &:hover {
+              background-color: $purple;
+            }
+          }
+        }
+      }
     }
   }
   @include tablet {
     margin: 2rem;
+    &-AI {
+      font-size: 1.2rem;
+      padding: 0.5rem 1.5rem;
+      font-weight: 600;
+    }
     &-input {
       padding: 1rem 1.5rem;
       &__subheading {
@@ -63,6 +98,20 @@
         width: 8rem;
         font-size: 1.4rem;
         font-weight: 600;
+      }
+      &__form {
+        flex-direction: row;
+        flex-wrap: wrap;
+        &--input {
+          font-size: 1.2rem;
+          width: 45%;
+          margin: 0.5rem 1rem;
+          padding: 0.5rem;
+          &-button {
+            margin: 0.5rem 1rem;
+            font-size: 1.2rem;
+          }
+        }
       }
     }
   }
@@ -81,6 +130,49 @@
         font-size: 1.5rem;
         font-weight: 600;
       }
+      &__form {
+        &--input {
+          font-size: 1.5rem;
+          width: 45%;
+          margin: 0.5rem 1rem;
+          padding: 0.5rem;
+          &-button {
+            margin: 0.5rem 1rem;
+            padding: 0 1rem;
+            font-size: 1.5rem;
+          }
+        }
+      }
     }
+  }
+}
+
+.experience {
+  width: 100%;
+}
+
+.education {
+  width: 100%;
+}
+
+.cert {
+  width: 100%;
+  &-button {
+    width: 100%;
+  }
+}
+
+.submit {
+  @include tablet {
+    margin: 1rem;
+  }
+}
+
+.cancel {
+  @include tablet {
+    width: 7rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-right: 3rem;
   }
 }

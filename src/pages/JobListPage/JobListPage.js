@@ -66,11 +66,11 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
         followup: 0,
         post_date: job.postDate || "No Data",
       });
+
       alert("Job saved successfully");
       setJobList((prevJobList) =>
         prevJobList.map((j) => (j.id === job.id ? { ...j, saved: true } : j))
       );
-      console.log("Saved job:", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -91,7 +91,7 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
         j.id === job.id ? { ...j, saved: false } : j
       );
       setJobList(updatedJobList);
-      console.log("Removed saved job:", job.title);
+      alert("Job removed from saved jobs");
     } catch (error) {
       console.error(error);
     }

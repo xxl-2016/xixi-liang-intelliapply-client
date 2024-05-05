@@ -6,12 +6,14 @@ import instagram from "../../assets/icons/Icon-instagram.svg";
 import Spline from "@splinetool/react-spline";
 import SubscriptionPlan from "../../components/SubscriptionPlan/SubscriptionPlan";
 import Hero from "../../components/Hero/Hero";
+import SplineNetwork from "../../components/SplineNetwork/SplineNetwork";
 
 export default function AboutUsPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   return (
     <>
       <section className="aboutus">
-      {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
+        {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
+        {SplineNetwork()}
         <div className="aboutus-network">
           <Spline
             className="aboutus-network__spline"

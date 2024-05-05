@@ -1,8 +1,8 @@
 import "./GeneratorPage.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import Hero from "../../components/Hero/Hero";
+import SplineNetwork from "../../components/SplineNetwork/SplineNetwork";
 
 export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [user, setUser] = useState(null);
@@ -68,6 +68,7 @@ export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   return (
     <>
       {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
+      {SplineNetwork()}
       <div className="generator">
         <div className="generator-resume">
           <button className="generator-resume__button" onClick={handleResume}>
