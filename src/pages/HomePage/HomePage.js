@@ -2,9 +2,9 @@ import "./HomePage.scss";
 import Spline from "@splinetool/react-spline";
 import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
-import axios from "axios";
 import SubScriptionPlan from "../../components/SubscriptionPlan/SubscriptionPlan";
 import Hero from "../../components/Hero/Hero";
+import "animate.css";
 
 export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [isExpandedSignUp, setIsExpandedSignUp] = useState(false);
@@ -152,24 +152,24 @@ export default function HomePage({ isUserLoggedIn, setIsUserLoggedIn }) {
           </div>
         </div>
         <div className="homePage-slogan">
-          <p className="homePage-slogan__title">01</p>
-          <h1 className="homePage-slogan__text">
+          <p className="homePage-slogan__title animate__animated animate__backInLeft">01</p>
+          <h1 className="homePage-slogan__text animate__animated animate__backInLeft">
             Streamlining Your Job Hunt, One Click at a Time.
           </h1>
         </div>
 
         <div className="homePage-API">
           <ul className="homePage-API__details">
-            <li className="homePage-API__details--indeed">Indeed</li>
-            <li className="homePage-API__details--glassdoor">Glassdoor</li>
-            <li className="homePage-API__details--linkedin">LinkedIn</li>
+            <li className="homePage-API__details--indeed animate__animated animate__backInRight">Indeed</li>
+            <li className="homePage-API__details--glassdoor animate__animated animate__backInRight">Glassdoor</li>
+            <li className="homePage-API__details--linkedin animate__animated animate__backInRight">LinkedIn</li>
           </ul>
-          <p className="homePage-API__title">02</p>
+          <p className="homePage-API__title animate__animated animate__backInRight">02</p>
         </div>
 
         <div className="homePage-AI">
-          <p className="homePage-AI__title">03</p>
-          <h1 className="homePage-AI__text">
+          <p className="homePage-AI__title animate__animated animate__backInLeft">03</p>
+          <h1 className="homePage-AI__text animate__animated animate__backInLeft">
             AI Powered Resume and Cover Letter Builder.
           </h1>
         </div>
