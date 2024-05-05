@@ -1,8 +1,17 @@
 # IntelliApply Pro
 
+![IntelliApply Pro Logo](src/assets/logos/intelliapply-logo.png)
+
 ## Overview
 
 IntelliApply Pro is a React-based web application designed to revolutionize the job application process. By integrating job search APIs from Indeed, Glassdoor, and LinkedIn, IntelliApply Pro offers users a comprehensive platform to find and apply for job listings efficiently. With AI-powered cover letter and resume generation capabilities, the platform ensures that users' application materials are tailored to each job listing, saving time and effort in the application process.
+
+## Installation
+To install IntelliApply Pro locally, follow steps:
+- Clone the repository: git clone https://github.com/xxl-2016/xixi-liang-intelliapply-client
+- npm i
+- npm start
+
 
 ## Problem
 Job seekers often face the challenge of navigating multiple job search platforms to find suitable job opportunities. Analyzing job listings, tailoring application materials, and managing the application process can be time-consuming and tedious. IntelliApply Pro addresses these pain points by centralizing job search, automating application material generation, and streamlining the application process.
@@ -110,6 +119,7 @@ SQL Diagram
 - Register a new user account.
 - Parameters:
     - email: User's email address.
+    - username: User's username.
     - password: User's chosen password.
 - Response:
 {
@@ -119,7 +129,7 @@ SQL Diagram
 **POST /users/login**
 - Log in an existing user.
 - Parameters:
-    - email: User's email address.
+    - username: User's username.
     - password: User's password.
 - Response:
 {
