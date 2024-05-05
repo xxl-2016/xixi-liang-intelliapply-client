@@ -3,125 +3,84 @@
 @use "../../styles/partials/typography" as *;
 
 .generator {
-  @include mobile {
-    height: 58rem;
-  }
-  @include desktop {
-    height: 70rem;
-  }
-  &-hero {
-    display: flex;
-    justify-content: space-between;
-    &__active {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      &--news {
-        font-size: 0.8rem;
-        text-decoration: none;
-        padding: 0 1rem;
-        border-radius: 20px;
-        background-color: rgba(#4d3589, 0.2);
-        cursor: pointer;
-        &:hover {
-          background-color: rgba(#4d3589, 0.6);
-        }
-        @include tablet {
-          font-size: 1rem;
-        }
-        @include desktop {
-          font-size: 1.5rem;
-        }
-      }
-      &--user {
-        @include tablet {
-          display: flex;
-          justify-content: space-between;
-          width: 28%;
-        }
-        &-avatar {
-          @include mobile {
-            font-size: 0.8rem;
-            display: block;
-            padding: 0 1rem;
-            border: none;
-            border-radius: 30px;
-            background-color: rgba(#00eaff, 0.1);
-            color: white;
-          }
-          @include tablet {
-            font-size: 1rem;
-          }
-          @include desktop {
-            font-size: 1.5rem;
-          }
-        }
-        &-logout {
-          @include mobile {
-            display: none;
-          }
-          @include tablet {
-            display: block;
-            font-size: 1rem;
-            padding: 0 1rem;
-            border-radius: 20px;
-            color: white;
-            border: none;
-            background-color: rgba(#00eaff, 0.1);
-            cursor: pointer;
-            &:hover {
-              background-color: rgba(#00eaff, 0.3);
-            }
-          }
-          @include desktop {
-            font-size: 1.5rem;
-          }
-        }
-      }
-    }
-    &__news {
-      text-decoration: none;
-      font-size: 0.8rem;
-      padding: 0 1rem;
-      border-radius: 20px;
-      background-color: rgba(#4d3589, 0.2);
-      cursor: pointer;
-      &:hover {
-        background-color: rgba(#4d3589, 0.6);
-      }
-      @include tablet {
-        font-size: 1rem;
-      }
-      @include desktop {
-        font-size: 1.5rem;
-      }
-    }
-    &__login {
-      font-size: 0.8rem;
-      padding: 0 1rem;
-      border-radius: 20px;
-      color: white;
-      border: none;
-      background-color: rgba(#00eaff, 0.1);
-      cursor: pointer;
-      &:hover {
-        background-color: rgba(#00eaff, 0.3);
-      }
-      @include tablet {
-        font-size: 1rem;
-      }
-      @include desktop {
-        font-size: 1.5rem;
-      }
-    }
+  &-resume {
     @include mobile {
-      margin: 0 1rem;
+      margin: 2rem 1rem;
+    }
+    &__button {
+      color: $white;
+      font-size: 1rem;
+      font-weight: 200;
+      background-color: rgba($dark-blue, 0.2);
+      text-align: center;
+      width: fit-content;
+      padding: 0 1rem;
+      border-radius: 40px;
+      margin-bottom: 1rem;
+      border: $purple 1px solid;
+    }
+    &__content pre {
+      padding: 1rem;
+      border-radius: 20px;
+      max-width: 100%;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      color: $white;
+      background-color: rgba($purple, 0.2);
     }
     @include tablet {
-      margin: 0 2rem;
+      margin: 2rem 2rem;
+      &__button {
+        font-size: 1.2rem;
+        padding: 0 2rem;
+      }
     }
     @include desktop {
-      margin: 0 5rem;
+      margin: 2rem 5rem;
+      &__button {
+        font-size: 1.5rem;
+        padding: 0 3rem;
+      }
+    }
+  }
+  &-cover {
+    @include mobile {
+      margin: 2rem 1rem;
+    }
+    &__button {
+      color: $white;
+      font-size: 1rem;
+      font-weight: 200;
+      background-color: rgba($dark-blue, 0.2);
+      text-align: center;
+      width: fit-content;
+      padding: 0 1rem;
+      border-radius: 40px;
+      margin-bottom: 1rem;
+      border: $purple 1px solid;
+    }
+    &__content pre {
+      padding: 1rem;
+      border-radius: 20px;
+      max-width: 100%;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      color: $white;
+      background-color: rgba($purple, 0.2);
+    }
+    @include tablet {
+      margin: 2rem 2rem;
+      &__button {
+        font-size: 1.2rem;
+        padding: 0 2rem;
+      }
+    }
+    @include desktop {
+      margin: 2rem 5rem;
+      &__button {
+        font-size: 1.5rem;
+        padding: 0 3rem;
+      }
     }
   }
 }

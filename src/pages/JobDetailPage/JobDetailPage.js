@@ -10,7 +10,7 @@ export default function JobDetailPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const { id } = useParams();
 
   useEffect(() => {
-    localStorage.removeItem("jobDetail");
+    // localStorage.removeItem("jobDetail");
     const storedJobDetail = JSON.parse(localStorage.getItem("jobDetail"));
     if (storedJobDetail) {
       setJob(storedJobDetail.data);
@@ -49,30 +49,40 @@ export default function JobDetailPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   return (
     <>
       {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
-      <div className="JobDetailPage">
-        <Link to="/job-list" className="back-link">
+      <div className="detail">
+        <Link to="/job-list" className="detail-link">
           Back to job list
         </Link>
-        {job ? (
-          <>
-            <h1>{job.title}</h1>
-            <h2>{job.state}</h2>
-            <p>{job.type}</p>
-            <p>{job.applies}</p>
-            <p>{job.views}</p>
-            <p>{job.workPlace}</p>
-            <h2>{job.location}</h2>
-            <Link to={job.url}>View</Link>
-            <h2>{job.company.name}</h2>
-            <p>{job.company.industries}</p>
-            <p>{job.company.description}</p>
-            <p>{job.location}</p>
-            <p>{job.description}</p>
-            <p>{job.skills}</p>
-          </>
-        ) : (
-          <p>Loading...</p>
-        )}
+        <div className="detail-info">
+          {job ? (
+            <>
+              <h1 className="detail-info__heading">{job.title}</h1>
+              <h2 className="detail-info__subheading">Job State:</h2>
+              <p className="detail-info__text">{job.state}</p>
+              <h2 className="detail-info__subheading">Type:</h2>
+              <p className="detail-info__text">{job.type}</p>
+              <h2 className="detail-info__subheading">Applies:</h2>
+              <p className="detail-info__text">{job.applies}</p>
+              <h2 className="detail-info__subheading">Views:</h2>
+              <p className="detail-info__text">{job.views}</p>
+              <h2 className="detail-info__subheading">Workplace:</h2>
+              <p className="detail-info__text">{job.workPlace}</p>
+              <h2 className="detail-info__subheading">Location:</h2>
+              <p className="detail-info__text">{job.location}</p>
+              <Link to={job.url}>View</Link>
+              <h2 className="detail-info__subheading">Company Name:</h2>
+              <p className="detail-info__text">{job.company.name}</p>
+              <h2 className="detail-info__subheading">Industries:</h2>
+              <p className="detail-info__text">{job.company.industries}</p>
+              <h2 className="detail-info__subheading">Description:</h2>
+              <p className="detail-info__text">{job.company.description}</p>
+              <h2 className="detail-info__subheading">Skills:</h2>
+              <p className="detail-info__text">{job.skills}</p>
+            </>
+          ) : (
+            <p className="detail-info__loading">Loading...</p>
+          )}
+        </div>
       </div>
     </>
   );

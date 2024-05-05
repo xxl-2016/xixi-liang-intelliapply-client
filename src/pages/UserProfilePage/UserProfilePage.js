@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Hero from "../../components/Hero/Hero";
+import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
+import editIcon from "../../assets/icons/share.png";
 
 export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [user, setUser] = useState(null);
@@ -113,9 +115,15 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
           {user ? (
             <>
               <div className="profile-user__heading">
-                <Link to="/user-info">Personal Info</Link>
-                <h2>Every effort counts, {user.username}!</h2>
-                <h2>Saved Jobs</h2>
+                <Link className="profile-user__heading--link" to="/user-info">
+                  Edit Profile
+                </Link>
+                <Link className="profile-user__heading--link" to="/job-list">
+                  Search Jobs
+                </Link>
+                <h2 className="profile-user__heading--text">
+                  {user.username}'s Saved Jobs:
+                </h2>
               </div>
 
               <div className="profile-user__sort">
@@ -132,6 +140,7 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                 jobs.jobs &&
                 jobs.jobs.map((job) => (
                   <div key={job.id} className="profile-user__card">
+                    <div className="profile-user__card--divider"></div>
                     <div className="profile-user__card--detail">
                       <div className="profile-user__card--detail-item">
                         <h3 className="profile-user__card--detail-item-heading">
@@ -150,38 +159,40 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                         </h3>
                       </div>
                       <div className="profile-user__card--detail-item">
-                        <h3 className="profile-user__card--detail-item-headingheading">
+                        <h3 className="profile-user__card--detail-item-heading">
                           FOLLOW UP
                         </h3>
-                        <h3 className="profile-user__card--detail-item-text">
-                          {job.followup}
-                        </h3>
-                        <button
-                          className="profile-user__card--detail-item-heading-increase"
-                          onClick={() => handleIncrease(job.id, job.followup)}
-                        >
-                          +
-                        </button>
-                        <button
-                          className="profile-user__card--detail-item-heading-decrease"
-                          onClick={() => handleDecrease(job.id, job.followup)}
-                        >
-                          -
-                        </button>
+                        <div className="followup">
+                          <h3 className="profile-user__card--detail-item-text">
+                            {job.followup}
+                          </h3>
+                          <button
+                            className="profile-user__card--detail-item-heading-increase followup-increase"
+                            onClick={() => handleIncrease(job.id, job.followup)}
+                          >
+                            +
+                          </button>
+                          <button
+                            className="profile-user__card--detail-item-heading-decrease followup-decrease"
+                            onClick={() => handleDecrease(job.id, job.followup)}
+                          >
+                            -
+                          </button>
+                        </div>
                       </div>
                       <div className="profile-user__card--detail-item">
-                        <h3 className="profile-user__card--detail-item-heading">
+                        <h3 className="profile-user__card--detail-item-heading location">
                           LOCATION
                         </h3>
-                        <h3 className="profile-user__card--detail-item-text">
+                        <h3 className="profile-user__card--detail-item-text location-text">
                           {job.location}
                         </h3>
                       </div>
-                      <div className="profile-user__card--detail-item">
+                      <div className="profile-user__card--detail-item postdate">
                         <h3 className="profile-user__card--detail-item-heading">
                           POST DATE
                         </h3>
-                        <h3 className="profile-user__card--detail-item-text">
+                        <h3 className="profile-user__card--detail-item-text postdate-text">
                           {job.post_date}
                         </h3>
                       </div>
@@ -189,30 +200,32 @@ export default function UserProfilePage({ isUserLoggedIn, setIsUserLoggedIn }) {
                         <h3 className="profile-user__card--detail-item-heading">
                           APPLIED
                         </h3>
-                        <h3 className="profile-user__card--detail-item-text">
-                          {job.applied ? "YES" : "NO"}
-                        </h3>
-                        <input
-                          type="checkbox"
-                          className="profile-user__card--detail-item-checkbox"
-                          checked={job.applied}
-                          onChange={(e) =>
-                            handleApply(job.id, e.target.checked)
-                          }
-                        />
+                        <div className="applied">
+                          <h3 className="profile-user__card--detail-item-text">
+                            {job.applied ? "YES" : "NO"}
+                          </h3>
+                          <input
+                            type="checkbox"
+                            className="profile-user__card--detail-item-checkbox"
+                            checked={job.applied}
+                            onChange={(e) =>
+                              handleApply(job.id, e.target.checked)
+                            }
+                          />
+                        </div>
                       </div>
                       <div className="profile-user__card--actions">
                         <Link
                           to={`/job-detail/${job.id}`}
                           className="profile-user__card--actions-link"
                         >
-                          VIEW/APPLY
+                          <img className="edit-icon" src={editIcon} alt="edit" />
                         </Link>
                         <button
                           className="profile-user__card--actions-delete"
                           onClick={() => handleDelete(job.id)}
                         >
-                          Delete
+                          <img src={deleteIcon} alt="delete" />
                         </button>
                       </div>
                     </div>

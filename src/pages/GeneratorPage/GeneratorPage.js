@@ -68,23 +68,34 @@ export default function GeneratorPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   return (
     <>
       {Hero({ isUserLoggedIn, setIsUserLoggedIn })}
-      <div>
-        <h1>Resume Generator</h1>
-        <button onClick={handleResume}>Generate</button>
-        {showResume && resumeData && (
-          <div className="resume-content">
-            <pre>{resumeData}</pre>
-          </div>
-        )}
-      </div>
-      <div>
-        <h1>Cover Letter Generator</h1>
-        <button onClick={handleCoverLetter}>Generate</button>
-        {showCoverLetter && coverLetterData && (
-          <div className="cover-letter-content">
-            <pre>{coverLetterData}</pre>
-          </div>
-        )}
+      <div className="generator">
+        <div className="generator-resume">
+          <button className="generator-resume__button" onClick={handleResume}>
+            Resume Generator
+          </button>
+          {showResume && resumeData && (
+            <div className="generator-resume__content">
+              <pre className="generator-resumme__content--detail">
+                {resumeData}
+              </pre>
+            </div>
+          )}
+        </div>
+        <div className="generator-cover">
+          <button
+            className="generator-cover__button"
+            onClick={handleCoverLetter}
+          >
+            Cover Letter Generator
+          </button>
+          {showCoverLetter && coverLetterData && (
+            <div className="generator-cover__content">
+              <pre className="generator-cover__content--detail">
+                {coverLetterData}
+              </pre>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

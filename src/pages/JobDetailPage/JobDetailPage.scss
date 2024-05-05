@@ -1,0 +1,75 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+
+.detail {
+  @include mobile {
+    margin: 1rem;
+    color: $white;
+    &-link {
+      color: $white;
+      font-size: 1rem;
+      font-weight: 200;
+      background-color: rgba($dark-blue, 0.2);
+      text-align: center;
+      width: fit-content;
+      padding: 0 1rem;
+      border-radius: 40px;
+      border: $purple 1px solid;
+    }
+    &-info {
+      background-color: rgba($dark-blue, 0.1);
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      margin-top: 2rem;
+      &__heading {
+        font-size: 1.5rem;
+        font-weight: 200;
+        margin: 1rem 0;
+      }
+      &__subheading {
+        font-size: 1rem;
+        font-weight: 600;
+        color: $dark-blue;
+      }
+    }
+  }
+  @include tablet {
+    margin: 2rem;
+    &-link {
+      font-size: 1.2rem;
+      padding: 0 2rem;
+    }
+    &-info {
+      padding: 1rem 1.5rem;
+      &__heading {
+        font-size: 1.5rem;
+      }
+      &__subheading {
+        font-size: 1.2rem;
+      }
+      &__text {
+        font-size: 1.2rem;
+      }
+    }
+  }
+  @include desktop {
+    margin: 2rem 5rem;
+    &-link {
+      font-size: 2rem;
+      padding: 0 3rem;
+    }
+    &-info {
+      padding: 1.5rem 2rem;
+      &__heading {
+        font-size: 2rem;
+      }
+      &__subheading {
+        font-size: 1.5rem;
+      }
+      &__text {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
