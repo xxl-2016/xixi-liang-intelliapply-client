@@ -17,7 +17,10 @@ To install IntelliApply Pro locally, follow steps:
 Job seekers often face the challenge of navigating multiple job search platforms to find suitable job opportunities. Analyzing job listings, tailoring application materials, and managing the application process can be time-consuming and tedious. IntelliApply Pro addresses these pain points by centralizing job search, automating application material generation, and streamlining the application process.
 
 ##Demo
-![IntelliApply Pro Demo](src/assets/demo/IntelliApply-demo.mp4)
+<video width="320" height="240" controls>
+  <source src="src/assets/demo/IntelliApply-demo.mp4" type="video/mp4">
+</video>
+
 
 ### User Profile
 - Job seekers:
