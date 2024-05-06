@@ -20,7 +20,7 @@ export default function LoginPage({ setIsUserLoggedIn }) {
       const token = authToken.access_token;
       localStorage.setItem("authToken", token);
       setIsUserLoggedIn(true);
-      navigate("/profile");
+      navigate("/");
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status === 401) {
