@@ -52,6 +52,9 @@
           border-radius: 30px;
           background-color: rgba(#00eaff, 0.1);
           color: white;
+          &:hover {
+            background-color: rgba(#00eaff, 0.3);
+          }
         }
         @include tablet {
           padding: 0.3rem 2rem;
