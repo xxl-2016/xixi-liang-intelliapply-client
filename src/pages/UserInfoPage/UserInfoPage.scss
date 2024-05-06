@@ -169,6 +169,11 @@
 }
 
 .cancel {
+  @include mobile {
+    font-size: 1rem;
+    padding: 0.3rem;
+    margin-right: 1rem;
+  }
   @include tablet {
     width: 7rem;
     font-size: 1.2rem;

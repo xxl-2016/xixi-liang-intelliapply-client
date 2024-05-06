@@ -9,21 +9,35 @@ import Hero from "../../components/Hero/Hero";
 export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
   const [keywords, setKeywords] = useState("");
   const [jobList, setJobList] = useState([]);
+  const [savedJobs, setSavedJobs] = useState([]);
   const [user, setUser] = useState(null);
   const [refresh, setRefresh] = useState(false);
 
   const handleSearch = async () => {
     try {
       localStorage.removeItem("jobList");
+      if (savedJobs.length === 0) {
+        const token = localStorage.getItem("authToken");
+        if (!token) return;
+
+        const response = await axios.get("http://localhost:6060/saved", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setSavedJobs(response.data);
+      }
       const response = await axios.get("http://localhost:6060/jobs", {
         params: {
           keywords: keywords || "developer",
         },
       });
-      const updatedJobList = response.data.data.map((job) => ({
+      const jobData = response.data.data;
+      const updatedJobList = jobData.map((job) => ({
         ...job,
-        saved: false,
+        saved: savedJobs.some((savedJob) => savedJob.id === job.id),
       }));
+      setJobList(updatedJobList);
       localStorage.setItem("jobList", JSON.stringify(updatedJobList));
       setRefresh(refresh + 1);
     } catch (error) {
@@ -54,6 +68,28 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
     }
   }, [refresh]);
 
+  useEffect(() => {
+    const fetchSavedJobs = async () => {
+      try {
+        const token = localStorage.getItem("authToken");
+        if (!token) return;
+        const response = await axios.get("http://localhost:6060/saved", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        localStorage.setItem("jobList", JSON.stringify(jobList));
+        const savedJobs = response.data;
+        setSavedJobs(savedJobs);
+        console.log("Saved Jobs:", savedJobs);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchSavedJobs();
+  }, [jobList]);
+
   const handleSaveJob = async (job) => {
     try {
       const response = await axios.post("http://localhost:6060/jobs", {
@@ -65,8 +101,8 @@ export default function JobSearch({ isUserLoggedIn, setIsUserLoggedIn }) {
         applied: false,
         followup: 0,
         post_date: job.postDate || "No Data",
+        saved: true,
       });
-
       alert("Job saved successfully");
       setJobList((prevJobList) =>
         prevJobList.map((j) => (j.id === job.id ? { ...j, saved: true } : j))
