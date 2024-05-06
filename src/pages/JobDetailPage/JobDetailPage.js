@@ -10,7 +10,7 @@ export default function JobDetailPage({ isUserLoggedIn, setIsUserLoggedIn }) {
   const { id } = useParams();
 
   useEffect(() => {
-    // localStorage.removeItem("jobDetail");
+    localStorage.removeItem("jobDetail");
     const storedJobDetail = JSON.parse(localStorage.getItem("jobDetail"));
     if (storedJobDetail) {
       setJob(storedJobDetail.data);
